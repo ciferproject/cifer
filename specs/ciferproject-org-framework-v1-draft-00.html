@@ -1,0 +1,696 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head profile="http://www.w3.org/2006/03/hcard http://dublincore.org/documents/2008/08/04/dc-html/">
+  <meta http-equiv="Content-Type" content="text/html; charset=us-ascii" />
+
+  <title>CIFER API Framework 00</title>
+
+  <style type="text/css" title="Xml2Rfc (sans serif)">
+  /*<![CDATA[*/
+	  a {
+	  text-decoration: none;
+	  }
+      /* info code from SantaKlauss at http://www.madaboutstyle.com/tooltip2.html */
+      a.info {
+          /* This is the key. */
+          position: relative;
+          z-index: 24;
+          text-decoration: none;
+      }
+      a.info:hover {
+          z-index: 25;
+          color: #FFF; background-color: #900;
+      }
+      a.info span { display: none; }
+      a.info:hover span.info {
+          /* The span will display just on :hover state. */
+          display: block;
+          position: absolute;
+          font-size: smaller;
+          top: 2em; left: -5em; width: 15em;
+          padding: 2px; border: 1px solid #333;
+          color: #900; background-color: #EEE;
+          text-align: left;
+      }
+	  a.smpl {
+	  color: black;
+	  }
+	  a:hover {
+	  text-decoration: underline;
+	  }
+	  a:active {
+	  text-decoration: underline;
+	  }
+	  address {
+	  margin-top: 1em;
+	  margin-left: 2em;
+	  font-style: normal;
+	  }
+	  body {
+	  color: black;
+	  font-family: verdana, helvetica, arial, sans-serif;
+	  font-size: 10pt;
+	  max-width: 55em;
+	  
+	  }
+	  cite {
+	  font-style: normal;
+	  }
+	  dd {
+	  margin-right: 2em;
+	  }
+	  dl {
+	  margin-left: 2em;
+	  }
+	
+	  ul.empty {
+	  list-style-type: none;
+	  }
+	  ul.empty li {
+	  margin-top: .5em;
+	  }
+	  dl p {
+	  margin-left: 0em;
+	  }
+	  dt {
+	  margin-top: .5em;
+	  }
+	  h1 {
+	  font-size: 14pt;
+	  line-height: 21pt;
+	  page-break-after: avoid;
+	  }
+	  h1.np {
+	  page-break-before: always;
+	  }
+	  h1 a {
+	  color: #333333;
+	  }
+	  h2 {
+	  font-size: 12pt;
+	  line-height: 15pt;
+	  page-break-after: avoid;
+	  }
+	  h3, h4, h5, h6 {
+	  font-size: 10pt;
+	  page-break-after: avoid;
+	  }
+	  h2 a, h3 a, h4 a, h5 a, h6 a {
+	  color: black;
+	  }
+	  img {
+	  margin-left: 3em;
+	  }
+	  li {
+	  margin-left: 2em;
+	  margin-right: 2em;
+	  }
+	  ol {
+	  margin-left: 2em;
+	  margin-right: 2em;
+	  }
+	  ol p {
+	  margin-left: 0em;
+	  }
+	  p {
+	  margin-left: 2em;
+	  margin-right: 2em;
+	  }
+	  pre {
+	  margin-left: 3em;
+	  background-color: lightyellow;
+	  padding: .25em;
+	  }
+	  pre.text2 {
+	  border-style: dotted;
+	  border-width: 1px;
+	  background-color: #f0f0f0;
+	  width: 69em;
+	  }
+	  pre.inline {
+	  background-color: white;
+	  padding: 0em;
+	  }
+	  pre.text {
+	  border-style: dotted;
+	  border-width: 1px;
+	  background-color: #f8f8f8;
+	  width: 69em;
+	  }
+	  pre.drawing {
+	  border-style: solid;
+	  border-width: 1px;
+	  background-color: #f8f8f8;
+	  padding: 2em;
+	  }
+	  table {
+	  margin-left: 2em;
+	  }
+	  table.tt {
+	  vertical-align: top;
+	  }
+	  table.full {
+	  border-style: outset;
+	  border-width: 1px;
+	  }
+	  table.headers {
+	  border-style: outset;
+	  border-width: 1px;
+	  }
+	  table.tt td {
+	  vertical-align: top;
+	  }
+	  table.full td {
+	  border-style: inset;
+	  border-width: 1px;
+	  }
+	  table.tt th {
+	  vertical-align: top;
+	  }
+	  table.full th {
+	  border-style: inset;
+	  border-width: 1px;
+	  }
+	  table.headers th {
+	  border-style: none none inset none;
+	  border-width: 1px;
+	  }
+	  table.left {
+	  margin-right: auto;
+	  }
+	  table.right {
+	  margin-left: auto;
+	  }
+	  table.center {
+	  margin-left: auto;
+	  margin-right: auto;
+	  }
+	  caption {
+	  caption-side: bottom;
+	  font-weight: bold;
+	  font-size: 9pt;
+	  margin-top: .5em;
+	  }
+	
+	  table.header {
+	  border-spacing: 1px;
+	  width: 95%;
+	  font-size: 10pt;
+	  color: white;
+	  }
+	  td.top {
+	  vertical-align: top;
+	  }
+	  td.topnowrap {
+	  vertical-align: top;
+	  white-space: nowrap; 
+	  }
+	  table.header td {
+	  background-color: gray;
+	  width: 50%;
+	  }
+	  table.header a {
+	  color: white;
+	  }
+	  td.reference {
+	  vertical-align: top;
+	  white-space: nowrap;
+	  padding-right: 1em;
+	  }
+	  thead {
+	  display:table-header-group;
+	  }
+	  ul.toc, ul.toc ul {
+	  list-style: none;
+	  margin-left: 1.5em;
+	  margin-right: 0em;
+	  padding-left: 0em;
+	  }
+	  ul.toc li {
+	  line-height: 150%;
+	  font-weight: bold;
+	  font-size: 10pt;
+	  margin-left: 0em;
+	  margin-right: 0em;
+	  }
+	  ul.toc li li {
+	  line-height: normal;
+	  font-weight: normal;
+	  font-size: 9pt;
+	  margin-left: 0em;
+	  margin-right: 0em;
+	  }
+	  li.excluded {
+	  font-size: 0pt;
+	  }
+	  ul p {
+	  margin-left: 0em;
+	  }
+	
+	  .comment {
+	  background-color: yellow;
+	  }
+	  .center {
+	  text-align: center;
+	  }
+	  .error {
+	  color: red;
+	  font-style: italic;
+	  font-weight: bold;
+	  }
+	  .figure {
+	  font-weight: bold;
+	  text-align: center;
+	  font-size: 9pt;
+	  }
+	  .filename {
+	  color: #333333;
+	  font-weight: bold;
+	  font-size: 12pt;
+	  line-height: 21pt;
+	  text-align: center;
+	  }
+	  .fn {
+	  font-weight: bold;
+	  }
+	  .hidden {
+	  display: none;
+	  }
+	  .left {
+	  text-align: left;
+	  }
+	  .right {
+	  text-align: right;
+	  }
+	  .title {
+	  color: #990000;
+	  font-size: 18pt;
+	  line-height: 18pt;
+	  font-weight: bold;
+	  text-align: center;
+	  margin-top: 36pt;
+	  }
+	  .vcardline {
+	  display: block;
+	  }
+	  .warning {
+	  font-size: 14pt;
+	  background-color: yellow;
+	  }
+	
+	
+	  @media print {
+	  .noprint {
+		display: none;
+	  }
+	
+	  a {
+		color: black;
+		text-decoration: none;
+	  }
+	
+	  table.header {
+		width: 90%;
+	  }
+	
+	  td.header {
+		width: 50%;
+		color: black;
+		background-color: white;
+		vertical-align: top;
+		font-size: 12pt;
+	  }
+	
+	  ul.toc a::after {
+		content: leader('.') target-counter(attr(href), page);
+	  }
+	
+	  ul.ind li li a {
+		content: target-counter(attr(href), page);
+	  }
+	
+	  .print2col {
+		column-count: 2;
+		-moz-column-count: 2;
+		column-fill: auto;
+	  }
+	  }
+	
+	  @page {
+	  @top-left {
+		   content: "Internet-Draft"; 
+	  } 
+	  @top-right {
+		   content: "December 2010"; 
+	  } 
+	  @top-center {
+		   content: "Abbreviated Title";
+	  } 
+	  @bottom-left {
+		   content: "Doe"; 
+	  } 
+	  @bottom-center {
+		   content: "Expires June 2011"; 
+	  } 
+	  @bottom-right {
+		   content: "[Page " counter(page) "]"; 
+	  } 
+	  }
+	
+	  @page:first { 
+		@top-left {
+		  content: normal;
+		}
+		@top-right {
+		  content: normal;
+		}
+		@top-center {
+		  content: normal;
+		}
+	  }
+  /*]]>*/
+  </style>
+
+  <link href="#rfc.toc" rel="Contents"/>
+<link href="#rfc.section.1" rel="Chapter" title="1 Introduction"/>
+<link href="#rfc.section.2" rel="Chapter" title="2 Definitions"/>
+<link href="#rfc.section.3" rel="Chapter" title="3 Requirements Language"/>
+<link href="#rfc.section.4" rel="Chapter" title="4 API Conventions"/>
+<link href="#rfc.section.4.1" rel="Chapter" title="4.1 Representations"/>
+<link href="#rfc.section.4.2" rel="Chapter" title="4.2 Requests"/>
+<link href="#rfc.section.4.3" rel="Chapter" title="4.3 Responses"/>
+<link href="#rfc.section.5" rel="Chapter" title="5 Examples"/>
+<link href="#rfc.section.5.1" rel="Chapter" title="5.1 Site directory"/>
+<link href="#rfc.section.5.2" rel="Chapter" title="5.2 Search response"/>
+<link href="#rfc.section.6" rel="Chapter" title="6 IANA Considerations"/>
+<link href="#rfc.section.7" rel="Chapter" title="7 Security Considerations"/>
+<link href="#rfc.section.8" rel="Chapter" title="8 Acknowledgements"/>
+<link href="#rfc.references" rel="Chapter" title="9 References"/>
+<link href="#rfc.references.1" rel="Chapter" title="9.1 Normative References"/>
+<link href="#rfc.references.2" rel="Chapter" title="9.2 Informative References"/>
+<link href="#rfc.authors" rel="Chapter"/>
+
+
+  <meta name="generator" content="xml2rfc version 2.4.5 - http://tools.ietf.org/tools/xml2rfc" />
+  <link rel="schema.dct" href="http://purl.org/dc/terms/" />
+
+  <meta name="dct.creator" content="Fox, J., Ed. and J. Fox" />
+  <meta name="dct.identifier" content="urn:ietf:id:ciferproject-org-framework-api-v1-draft-00" />
+  <meta name="dct.issued" scheme="ISO8601" content="2014-2-10" />
+  <meta name="dct.abstract" content="The CIFER API Framework gives a consistant look, feel, syntax and nomenclature to all of the various CIFER resource representations." />
+  <meta name="description" content="The CIFER API Framework gives a consistant look, feel, syntax and nomenclature to all of the various CIFER resource representations." />
+
+</head>
+
+<body>
+
+  <table class="header">
+    <tbody>
+    
+    	<tr>
+  <td class="left">Internet Engineering Task Force</td>
+  <td class="right">J. Fox, Ed.</td>
+</tr>
+<tr>
+  <td class="left">Internet-Draft</td>
+  <td class="right">J. Fox</td>
+</tr>
+<tr>
+  <td class="left">Intended status: Informational</td>
+  <td class="right">ciferproject.org</td>
+</tr>
+<tr>
+  <td class="left">Expires: August 14, 2014</td>
+  <td class="right">February 10, 2014</td>
+</tr>
+
+    	
+    </tbody>
+  </table>
+
+  <p class="title">CIFER API Framework 00<br />
+  <span class="filename">ciferproject-org-framework-api-v1-draft-00</span></p>
+  
+  <h1 id="rfc.abstract">
+  <a href="#rfc.abstract">Abstract</a>
+</h1>
+<p>The CIFER API Framework gives a consistant look, feel, syntax and nomenclature to all of the various CIFER resource representations.</p>
+<h1 id="rfc.status">
+  <a href="#rfc.status">Status of This Memo</a>
+</h1>
+<p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
+<p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
+<p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
+<p>This Internet-Draft will expire on August 14, 2014.</p>
+<h1 id="rfc.copyrightnotice">
+  <a href="#rfc.copyrightnotice">Copyright Notice</a>
+</h1>
+<p>Copyright (c) 2014 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
+<p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (http://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
+
+  
+  <hr class="noprint" />
+  <h1 class="np" id="rfc.toc"><a href="#rfc.toc">Table of Contents</a></h1>
+  <ul class="toc">
+
+  	<li>1.   <a href="#rfc.section.1">Introduction</a></li>
+<li>2.   <a href="#rfc.section.2">Definitions</a></li>
+<li>3.   <a href="#rfc.section.3">Requirements Language</a></li>
+<li>4.   <a href="#rfc.section.4">API Conventions</a></li>
+<li>4.1.   <a href="#rfc.section.4.1">Representations</a></li>
+<li>4.2.   <a href="#rfc.section.4.2">Requests</a></li>
+<li>4.3.   <a href="#rfc.section.4.3">Responses</a></li>
+<li>5.   <a href="#rfc.section.5">Examples</a></li>
+<li>5.1.   <a href="#rfc.section.5.1">Site directory</a></li>
+<li>5.2.   <a href="#rfc.section.5.2">Search response</a></li>
+<li>6.   <a href="#rfc.section.6">IANA Considerations</a></li>
+<li>7.   <a href="#rfc.section.7">Security Considerations</a></li>
+<li>8.   <a href="#rfc.section.8">Acknowledgements</a></li>
+<li>9.   <a href="#rfc.references">References</a></li>
+<li>9.1.   <a href="#rfc.references.1">Normative References</a></li>
+<li>9.2.   <a href="#rfc.references.2">Informative References</a></li>
+<li><a href="#rfc.authors">Authors' Addresses</a></li>
+
+
+  </ul>
+
+  <h1 id="rfc.section.1"><a href="#rfc.section.1">1.</a> Introduction</h1>
+<p id="rfc.section.1.p.1">The <a href="#CIFER">[CIFER]</a> initiative includes work to define a set of shared APIs for core functions in identity and access management.  One desired feature of such systems is a consistancy tructure and vocabulary of API URLs and representations.  </p>
+<h1 id="rfc.section.2"><a href="#rfc.section.2">2.</a> Definitions</h1>
+<p/>
+
+<dl>
+  <dt>RESTful</dt>
+  <dd style="margin-left: 8">A RESTful service is composed of resources.  The state of a resource is defined by one or more representations and identified by one or more URIs.</dd>
+  <dt></dt>
+  <dd style="margin-left: 8">Clients of the service may:</dd>
+  <dt></dt>
+  <dd style="margin-left: 8">
+    <ul>
+      <li>Search for resources,</li>
+      <li>Get a representation of a resource,</li>
+      <li>Add or replace a resource, and</li>
+      <li>Delete a resource.</li>
+    </ul>
+    <p> </p>
+  </dd>
+</dl>
+
+<p> </p>
+<h1 id="rfc.section.3"><a href="#rfc.section.3">3.</a> Requirements Language</h1>
+<p id="rfc.section.3.p.1">The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in <a href="#RFC2119">RFC 2119</a> <cite title="NONE">[RFC2119]</cite>.</p>
+<h1 id="rfc.section.4"><a href="#rfc.section.4">4.</a> API Conventions</h1>
+<h1 id="rfc.section.4.1"><a href="#rfc.section.4.1">4.1.</a> Representations</h1>
+<p id="rfc.section.4.1.p.1">Representations in the CIFER APIs follow these conventions, except as noted in a specific API document.</p>
+<p/>
+
+<ol>
+  <li>Character set is UTF-8.</li>
+  <li>Default language is JSON.  XML is optional.</li>
+  <li>Server major versions are indicated in the URI path, e.g. /v2/, and differentiate incompatible representations,  parameters or headers.</li>
+  <li>Minor versioning is indicated in the responseMetadata---not in the URL.</li>
+  <li>Field names are camelCase (including acronyms), e.g. "selfUri"</li>
+  <li>Field names must start with a letter. They can contain upper/lower letters, numbers and underscores.</li>
+  <li>Field type, e.g. string, date,..., cannot change without a major version change.</li>
+  <li>Timestamps are ISO 8601, e.g.: 2012-10-04T03:10:14.123Z</li>
+  <li>Durations are ISO 8601, e.g.: P1.81S</li>
+  <li>Objects are identified by uri <ul><li>e.g.: netId:mchyzer, or userId:12345678</li></ul><p> </p></li>
+  <li>The suggested hierarchical path separator is a colon ":".  <ul><li>An actual colon in a name part is represented by slash-colon ("\:").</li></ul><p> </p></li>
+</ol>
+
+<p> </p>
+<h1 id="rfc.section.4.2"><a href="#rfc.section.4.2">4.2.</a> Requests</h1>
+<p id="rfc.section.4.2.p.1">Requests in the CIFER APIs follow these conventions, except as noted in a specific API document.</p>
+<p/>
+
+<ol>
+  <li>Full resources are identified by URI authority and path---not by query string or fragment.</li>
+  <li>The URL of a partial resource, e.g., a paged response, is further identified by query string parameters.</li>
+  <li>An XML representation may requested by header: <ul><li>Accept: text/xml</li></ul><p> </p></li>
+  <li>If the request method is POST, the method may be overridden by a header: <ul><li>X-HTTP-Method-Override: GET | PUT | DELETE</li></ul><p> </p></li>
+  <li>A client may request to "act as" another user  via a header: <ul><li>X-CIFER-Act-As: user_uri</li></ul><p> </p></li>
+  <li>A client may define or override request headers with query string parameters <ul><li>e.g.: "&amp;Accept=application%2Fjson&amp;"</li></ul><p> </p></li>
+  <li>Boolean parameters are generously interpreted: <ul><li>true|false,  or t|f or yes|no,  or y|n or 1|0, case insensitive</li></ul><p> </p></li>
+  <li>Use of ETag and If-Match: <ul><li>A request to replace a resource must specify an If-Match header.  <ul><li>The value must match the resource's current ETag value, or</li><li>The value may be a 'match-any' wildcard, '*'</li><li>Acceptance of wildcard is service dependent.</li><li>A request to add a resource must not specify an If-Match header.</li></ul><p> </p></li></ul><p> </p></li>
+  <li>A PUT request need not specify all attributes.  <ul><li>Replacing a resource will not affect unspecified attributes.</li><li>A necessary attribute not specified will return an error 400.</li></ul><p> </p></li>
+  <li>Searches return resource URIs and default resource attributes.  <ul><li>Each service will document the fields returns on searches.</li><li>Searches may request "&amp;extraFields=field3,field4,..&amp;" to get those fields in addition to the default set.</li><li>Searches may request "&amp;omitFields=field3,field4,..&amp;" to omit those fields from the default set.</li><li>Support for these features is optional.</li></ul><p> </p></li>
+  <li>Searches may specify paging options by QS parameters <ul><li>pageLimit: Number of entries per page</li><li>pageOffset: page number, first page is zero</li></ul><p> </p></li>
+  <li>Requests may specify field filters on returned resources.  <ul><li>Query string may specify a list desired fields: "&amp;fields=field1,field2,...&amp;" </li><li>A requests for an unknown field is not an error.</li><li>Support for this features is optional.</li></ul><p> </p></li>
+  <li>Requests for large resources, e.g. group membership,  may specify paging parameters <ul><li>sortField:</li><li>sortOrder: 'a*', 'd*', case insensitive</li><li>pageLimit: number of entries per page, zero means no paging</li><li>Mutually exclusive page start: <ul><li>pageOffset: page number, starting with zero, OR</li><li>pageStartValue: first value returned will be the one AFTER this value</li></ul><p> </p></li><li>The service may provide default paging parameters, and may reduce the requested limits.</li></ul><p> </p></li>
+  <li>A client may request a pretty-printed response with the query string, "indent=true".</li>
+  <li>Unexpected Query String parameters will be ignored.</li>
+</ol>
+
+<p> </p>
+<h1 id="rfc.section.4.3"><a href="#rfc.section.4.3">4.3.</a> Responses</h1>
+<p id="rfc.section.4.3.p.1">Responses in the CIFER APIs follow these conventions, except as noted in a specific API document.</p>
+<p/>
+
+<ol>
+  <li>Resources are wrapped in an object which contains: <ul><li>resourceMetadata: metadata about the resource. fields as appropriate to the resource <ul><li>lastModified: timestamp when the resource was modified</li><li>selfUri: URI to the current resource.</li><li>ETag, or equivalent, for resources that can be replaced, ...</li></ul><p> </p></li><li>responseMetadata: metadata about this particular response <ul><li>responseTimestamp:</li><li>responseTime: time that the server took in processing this request</li><li>requestCommentary: freeform text about the request that the server processed (for debug)</li><li>httpStatusCode: response status as an HTTP status code.</li><li>serverVersion: major.minor server version number</li><li>paging parameters <ul><li>pageLimit</li><li>pageOffest</li><li>sortField</li><li>pageOffsetValue</li><li>sortOrder</li></ul><p> </p></li><li>...</li></ul><p> </p></li><li>resource: The actual resource for the request.</li></ul><p> </p></li>
+  <li>Response codes: <ul><li>200: the resource was found</li><li>201: the resource was created</li><li>400: the request was not valid</li><li>401: the client was unauthenticated</li><li>403: an authenticated client was not authorized for the request</li><li>409: (conflict) <ul><li>PUT to an existing resource without an If-Match</li></ul><p> </p></li><li>412: (precondition failed) <ul><li>If-Match header did not match resource's ETag, or</li><li>If-Match header supplied but resource not found (add with an if-match), or</li><li>wildcard if-match not allowed</li></ul><p> </p></li><li>500: server error</li></ul><p> </p></li>
+</ol>
+
+<p> </p>
+<h1 id="rfc.section.5"><a href="#rfc.section.5">5.</a> Examples</h1>
+<h1 id="rfc.section.5.1"><a href="#rfc.section.5.1">5.1.</a> Site directory</h1>
+<p>What might be returned by a top-level GET to a service.</p>
+<pre>
+{
+  "resource":{
+    "people": "/people",
+    "places": "/places"
+  },
+  "resourceMetadata":{
+    "lastModified":"2012-11-04T09:57:03.541Z",
+    "baseUri":"https://example.u.edu/ppservice/v1/",
+ 
+  },
+  "responseMeta":{
+    "responseTimestamp":"2013-07-04T09:57:03.541Z",
+    "httpStatusCode":200,
+    "responseTime":"P0.011S"
+    "serverVersion":"1.1"
+  }
+}
+     </pre>
+<h1 id="rfc.section.5.2"><a href="#rfc.section.5.2">5.2.</a> Search response</h1>
+<p>What might be returned by a search GET to a service.</p>
+<pre>
+{
+  "resource":[
+   {"uuid": "3ac85497-1663-4ef4-9933-3df8bc7800bc",
+    "lastName": "Doe",
+    "givenName": "John A.",
+    "address": { ... }
+    "status": "something",
+    "uri": "/v1/people/3ac85497-1663-4ef4-9933-3df8bc7800bc"
+   },
+   {"uuid": "3ac85497-1663-4ef4-9933-3df8bc7800cc",
+    "lastName": "Doe",
+    "givenName": "John B.",
+    "address": { ... }
+    "status": "something",
+    "uri": "/v1/people/3ac85497-1663-4ef4-9933-3df8bc7800cc"
+   },
+  ],
+ 
+  "resourceMetadata":{
+    "baseUri":"https://example.u.edu/ppservice",
+    "sortOrder":"a",
+    "pageLimit":100,
+    "pageOffset":0,
+    "sortField":"name",
+    "statusCode":"SUCCESS",
+  },
+  "responseMeta":{
+    "responseTimestamp":"2013-07-04T09:57:03.541Z",
+    "httpStatusCode":200,
+    "responseTime":"P0.011S"
+    "serverVersion":"1.1"
+  }
+}
+     </pre>
+<h1 id="rfc.section.6"><a href="#rfc.section.6">6.</a> <a href="#IANA" id="IANA">IANA Considerations</a></h1>
+<p id="rfc.section.6.p.1">This memo includes no request to IANA.</p>
+<h1 id="rfc.section.7"><a href="#rfc.section.7">7.</a> <a href="#Security" id="Security">Security Considerations</a></h1>
+<p id="rfc.section.7.p.1">The API framework does not specify how services identify their clients.</p>
+<h1 id="rfc.section.8"><a href="#rfc.section.8">8.</a> <a href="#Acknowledgements" id="Acknowledgements">Acknowledgements</a></h1>
+<p id="rfc.section.8.p.1">This document was produced by the CIFER Shared API work team. People who made particular contributions to the work include Jim Fox, Keith Hazelton, Chris Hyzer, Benn Oshrin, Jonathan Pass and Jimmy Vuccolo</p>
+<h1 id="rfc.references"><a href="#rfc.references">9.</a> References</h1>
+<h1 id="rfc.references.1"><a href="#rfc.references.1">9.1.</a> Normative References</h1>
+<table>
+  <tbody>
+    <tr>
+      <td class="reference">
+        <b id="RFC2119">[RFC2119]</b>
+      </td>
+      <td class="top"><a href="mailto:sob@harvard.edu" title="Harvard University">Bradner, S.</a>, "<a href="http://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>", BCP 14, RFC 2119, March 1997.</td>
+    </tr>
+  </tbody>
+</table>
+<h1 id="rfc.references.2"><a href="#rfc.references.2">9.2.</a> Informative References</h1>
+<table>
+  <tbody>
+    <tr>
+      <td class="reference">
+        <b id="CIFER">[CIFER]</b>
+      </td>
+      <td class="top"><a>CIFER</a>, "<a href="http://ciferproject.org">CIFER Home Page</a>", 2014.</td>
+    </tr>
+  </tbody>
+</table>
+<h1 id="rfc.authors">
+  <a href="#rfc.authors">Authors' Addresses</a>
+</h1>
+<div class="avoidbreak">
+  <address class="vcard">
+	<span class="vcardline">
+	  <span class="fn">Jim Fox</span> (editor)
+	  <span class="n hidden">
+		<span class="family-name">Fox</span>
+	  </span>
+	</span>
+	<span class="org vcardline">ciferproject.org</span>
+	<span class="adr">
+	  <span class="vcardline">4333 Brooklyn Ave NE</span>
+
+	  <span class="vcardline">
+		<span class="locality">Seattle</span>,  
+		<span class="region">Washington</span> 
+		<span class="code">98195</span>
+	  </span>
+	  <span class="country-name vcardline">US</span>
+	</span>
+	<span class="vcardline">Phone: +1 206 543 4320</span>
+
+<span class="vcardline">EMail: <a href="mailto:fox@uw.edu">fox@uw.edu</a></span>
+
+  </address>
+</div><div class="avoidbreak">
+  <address class="vcard">
+	<span class="vcardline">
+	  <span class="fn">Jim Fox</span> 
+	  <span class="n hidden">
+		<span class="family-name">Fox</span>
+	  </span>
+	</span>
+	<span class="org vcardline">ciferproject.org</span>
+	<span class="adr">
+	  
+	  <span class="vcardline">
+		<span class="locality"></span> 
+		<span class="region"></span>
+		<span class="code"></span>
+	  </span>
+	  <span class="country-name vcardline"></span>
+	</span>
+	<span class="vcardline">EMail: <a href="mailto:fox@uw.edu">fox@uw.edu</a></span>
+
+  </address>
+</div>
+
+</body>
+</html>

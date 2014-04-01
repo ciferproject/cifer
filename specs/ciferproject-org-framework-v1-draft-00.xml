@@ -100,7 +100,8 @@ One desired feature of such systems is a consistancy tructure and vocabulary of 
    <section title="Definitions">
      <t>
       <list style="hanging">
-        <t hangText="RESTful"> A RESTful service is composed of resources.  The state of a resource is defined by one or more representations and identified by one or more URIs.</t>
+        <t hangText="RESTful">This framework references Representational State Transfer (REST), where a service is composed of an addressable set of resources.  URIs are used to address resources and transitions of a resources state are accomplished by direct, stateless client interactions with these URIs.
+         </t>
        <t>Clients of the service may:</t>
         <t>
          <list style="symbols">
@@ -122,83 +123,68 @@ One desired feature of such systems is a consistancy tructure and vocabulary of 
         target="RFC2119">RFC 2119</xref>.</t>
  </section>
 
- <section title="API Conventions">
-   <section title="Representations">
-    <t>Representations in the CIFER APIs follow these conventions, except as noted in a specific API document.</t>
-    <t>
-    <list style="numbers">
-      <t>Character set is UTF-8.</t>
-      <t>Default language is JSON.  XML is optional.</t>
-      <t>Server major versions are indicated in the URI path, e.g. /v2/, and differentiate incompatible representations,  parameters or headers.</t>
-      <t>Minor versioning is indicated in the responseMetadata---not in the URL.</t>
-      <t>Field names are camelCase (including acronyms), e.g. "selfUri"</t>
-      <t>Field names must start with a letter. They can contain upper/lower letters, numbers and underscores.</t>
-      <t>Field type, e.g. string, date,..., cannot change without a major version change.</t>
-      <t>Timestamps are ISO 8601, e.g.: 2012-10-04T03:10:14.123Z</t>
-      <t>Durations are ISO 8601, e.g.: P1.81S</t>
-      <t>Objects are identified by uri
-        <list style="symbols">
-          <t>e.g.: netId:mchyzer, or userId:12345678</t>
-        </list>
-      </t>
-      <t>The suggested hierarchical path separator is a colon ":".
-        <list style="symbols">
-          <t>An actual colon in a name part is represented by slash-colon ("\:").</t>
-        </list>
-      </t>
-    </list>
-   </t>
-   </section>
-    
+ <section title="Authentication and Authorization">
+    <t>tbd</t>
+ </section>
 
-   <section title="Requests">
-    <t>Requests in the CIFER APIs follow these conventions, except as noted in a specific API document.</t>
-    <t>
-    <list style="numbers">
-       <t>Full resources are identified by URI authority and path---not by query string or fragment.</t>
-       <t>The URL of a partial resource, e.g., a paged response, is further identified by query string parameters.</t>
-       <t>An XML representation may requested by header:
-        <list style="symbols">
-         <t>Accept: text/xml</t>
+
+ <section title="API Conventions">
+   <section title="Grammar and Format Constraints">
+     <section title="URI syntax">
+       <t>
+        A major version of a particular CIFER API must be indicated in the URI path
+         (for example, "/v2/").  A major version will differentiate incompatible representations,  parameters or headers.  
+        A major version change is also indicated by a change in field type.
+        Any minor version will be indicated in the response metadata not in the URI path (see response section below).
+       </t>
+     </section>
+     <section title="Request/response grammar">
+       <t>
+        <list style="numbers">
+          <t>Default representation language is Javascript Object Notation (JSON).</t>
+          <t>XML can be requested, but support is not required.</t>
         </list>
        </t>
-       <t>If the request method is POST, the method may be overridden by a header:
-        <list style="symbols">
-         <t>X-HTTP-Method-Override: GET | PUT | DELETE</t>
-        </list>
-       </t>
-       <t>A client may request to "act as" another user  via a header:
-        <list style="symbols">
-         <t>X-CIFER-Act-As: user_uri</t>
-        </list>
-       </t>
-       <t>A client may define or override request headers with query string parameters
-        <list style="symbols">
-         <t>e.g.: "&amp;Accept=application%2Fjson&amp;"</t>
-        </list>
-       </t>
-       <t>Boolean parameters are generously interpreted:
-        <list style="symbols">
-         <t>true|false,  or t|f or yes|no,  or y|n or 1|0, case insensitive</t>
-        </list>
-       </t>
-       <t>Use of ETag and If-Match:
-        <list style="symbols">
-         <t>A request to replace a resource must specify an If-Match header.
-          <list style="symbols">
-           <t>The value must match the resource's current ETag value, or</t>
-           <t>The value may be a 'match-any' wildcard, '*'</t>
-           <t>Acceptance of wildcard is service dependent.</t>
-           <t>A request to add a resource must not specify an If-Match header.</t>
-          </list>
+     </section>
+     <section title="Data and field formats">
+       <t>
+       <list style="numbers">
+         <t>Character set is Unicode, encoded as UTF-8.</t>
+         <t>imestamp representations will comply with ISO 8601.  For example: 2012-10-04T03:10:14.123Z</t>
+         <t>Durations also comply with ISO 8601, For example: P1.81S</t>
+         <t>Field names are camelCase (including acronyms), e.g. "selfUri"</t>
+         <t>Field names must start with a letter. They can contain upper/lower letters, numbers and underscores.</t>
+         <t>Field types must stay consistent within a major version.</t>
+         <t>Objects are identified by uri
+           <list style="symbols">
+             <t>For example: netId:mchyzer, or userId:12345678</t>
+           </list>
          </t>
         </list>
        </t>
-       <t>A PUT request need not specify all attributes.
-        <list style="symbols">
-         <t>Replacing a resource will not affect unspecified attributes.</t>
-         <t>A necessary attribute not specified will return an error 400.</t>
+      </section>
+   </section>
+
+   <section title="Requests">
+     <section title="Resource references">
+       <t>CIFER APIs accommodate large responses by recognizing full and partial resources.</t>
+       <t>
+       <list style="numbers">
+         <t>A full resource, where the response is the full resource requested, must be identified by a URI only, not by query string or fragment.</t>
+         <t>A partial resource, like a response that is better served across pages, is identified by a URI that contains at least one additional query string parameter (see paging options in query string options section below).</t>
         </list>
+       </t>
+      </section>
+
+     <section title="Request methods">
+       <t>
+       <list style="numbers">
+       <t>The request method of POST overridden by a header (see header options below).</t>
+       <t>A PUT request need not specify all attributes.
+         <list style="numbers">
+            <t>Replacing a resource will not affect attributes not specified in the request.</t>
+            <t>A necessary attribute not specified will return an error 400 (see response codes below).</t>
+         </list>
        </t>
        <t>Searches return resource URIs and default resource attributes.
         <list style="symbols">
@@ -214,6 +200,58 @@ One desired feature of such systems is a consistancy tructure and vocabulary of 
          <t>pageOffset: page number, first page is zero</t>
         </list>
        </t>
+       </list>
+       </t>
+      </section>
+
+     <section title="Header Options">
+       <t>
+       <list style="numbers">
+
+       <t>The request method of POST may be overridden by the header:
+        <list style="symbols">
+         <t>X-HTTP-Method-Override: GET | PUT | DELETE</t>
+        </list>
+       </t>
+
+       <t>XML representation may requested by header:
+        <list style="symbols">
+         <t>Accept: text/xml</t>
+        </list>
+       </t>
+
+       <t>Use of ETag and If-Match:
+        <list style="symbols">
+         <t>A request to replace a resource must specify an If-Match header.
+          <list style="symbols">
+           <t>The value must match the resource's current ETag value, or</t>
+           <t>The value may be a 'match-any' wildcard, '*'</t>
+           <t>Acceptance of wildcard is service dependent.</t>
+           <t>A request to add a resource must not specify an If-Match header.</t>
+          </list>
+         </t>
+        </list>
+       </t>
+
+       <t>A client may request to "act as" another user  via a header:
+        <list style="symbols">
+         <t>X-CIFER-Act-As: user_uri</t>
+        </list>
+       </t>
+
+       </list>
+       </t>
+      </section>
+
+     <section title="Query string options">
+       <t>
+       <list style="numbers">
+       <t>A client may define or override request headers with query string parameters
+        <list style="symbols">
+         <t>e.g.: "&amp;Accept=application%2Fjson&amp;"</t>
+        </list>
+       </t>
+
        <t>Requests may specify field filters on returned resources.
         <list style="symbols">
          <t>Query string may specify a list desired fields: "&amp;fields=field1,field2,...&amp;" </t>
@@ -235,49 +273,75 @@ One desired feature of such systems is a consistancy tructure and vocabulary of 
          <t>The service may provide default paging parameters, and may reduce the requested limits.</t>
         </list>
        </t>
+       <t>Boolean parameters are generously interpreted:
+        <list style="symbols">
+         <t>true|false,  or t|f or yes|no,  or y|n or 1|0, case insensitive</t>
+        </list>
+       </t>
+
        <t>A client may request a pretty-printed response with the query string, "indent=true".</t>
        <t>Unexpected Query String parameters will be ignored.</t> 
-    </list>
-   </t>
+       </list>
+      </t>
+
+     </section>
+
    </section>
 
+     <section title="Request methods">
+       <t>While most browser facing web sites are nowadays discoverable from the root resource, there never was a time when an application could be completely discovered through its API.</t>
+       <t>
+       <list style="numbers">
+        <t>The complexity of resources, authorizations, capabilities, and interactions requires, often extensive, external documentation of the application.</t>
+        <t>To be efficient a client often must be able to directly address a resource.</t>
+       </list>
+       </t>
+      <t>These considerations indicate that a root resource, with links to version resources, with links to other resource URLs will in almost all cases be bypassed by clients.  User readable API documentation will specify direct, if relative, links directly to most of the individual resources. </t>      <t>The framework does not specify these root and directory representations, except that they follow the general request and response guidelines.  A root page may be used to provide general information about the application instance:  what version it supports; whether or not it supports XML representation; etc.</t>
+
+      </section>
+
+
    <section title="Responses">
-    <t>Responses in the CIFER APIs follow these conventions, except as noted in a specific API document.</t>
-    <t>
-    <list style="numbers">
+     <section title="Response structure">
+       <t>Resources are returned along with metadata about the resource and metadata about the response (see JSON examples that follow)</t>
+       <t>
+       <list style="numbers">
        <t>Resources are wrapped in an object which contains:
-         <list style="symbols">
-          <t>resourceMetadata: metadata about the resource. fields as appropriate to the resource
+         <list style="numbers">
+           <t>resource: The actual resource for the request.</t> 
+           <t>resourceMetadata: metadata about the resource. fields as appropriate to the resource
             <list style="symbols">
              <t>lastModified: timestamp when the resource was modified</t>
              <t>selfUri: URI to the current resource.</t>
              <t>ETag, or equivalent, for resources that can be replaced, ...</t>
-           </list>
-          </t>
-          <t>responseMetadata: metadata about this particular response
-           <list style="symbols">
-            <t>responseTimestamp:</t>
-            <t>responseTime: time that the server took in processing this request</t>
-            <t>requestCommentary: freeform text about the request that the server processed (for debug)</t>
-            <t>httpStatusCode: response status as an HTTP status code.</t>
-            <t>serverVersion: major.minor server version number</t>
-            <t>paging parameters
+            </list>
+           </t>
+           <t>responseMetadata: metadata about this particular response
              <list style="symbols">
-              <t>            pageLimit</t>
-              <t>            pageOffest</t> 
-              <t>            sortField</t>
-              <t>            pageOffsetValue</t> 
-              <t>            sortOrder</t>
-             </list>
+              <t>responseTimestamp:</t>
+              <t>responseTime: time that the server took in processing this request</t>
+              <t>requestCommentary: freeform text about the request that the server processed (for debug)</t>
+              <t>httpStatusCode: response status as an HTTP status code.</t>
+              <t>serverVersion: major.minor server version number</t>
+              <t>paging parameters
+                <list style="symbols">
+                 <t>            pageLimit</t>
+                 <t>            pageOffest</t> 
+                 <t>            sortField</t>
+                 <t>            pageOffsetValue</t> 
+                 <t>            sortOrder</t>
+                </list>
+               </t>
+              </list>
             </t>
-            <t>...</t> 
            </list>
           </t>
-          <t>resource: The actual resource for the request.</t> 
-         </list>
+        </list>
        </t>
-       <t>Response codes:
-         <list style="symbols">
+      </section>
+     <section title="Response codes">
+       <t>
+       <list style="numbers">
           <t>200: the resource was found</t>
           <t>201: the resource was created</t>
           <t>400: the request was not valid</t>
@@ -297,12 +361,9 @@ One desired feature of such systems is a consistancy tructure and vocabulary of 
           </t>
           <t>500: server error</t>
          </list>
-       </t>
-    </list>
-   </t>
+      </t>
+    </section>
    </section>
-
-
  </section>
  
  <section title="Examples">

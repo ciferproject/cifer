@@ -377,19 +377,30 @@
 <link href="#rfc.section.1" rel="Chapter" title="1 Introduction"/>
 <link href="#rfc.section.2" rel="Chapter" title="2 Definitions"/>
 <link href="#rfc.section.3" rel="Chapter" title="3 Requirements Language"/>
-<link href="#rfc.section.4" rel="Chapter" title="4 API Conventions"/>
-<link href="#rfc.section.4.1" rel="Chapter" title="4.1 Representations"/>
-<link href="#rfc.section.4.2" rel="Chapter" title="4.2 Requests"/>
-<link href="#rfc.section.4.3" rel="Chapter" title="4.3 Responses"/>
-<link href="#rfc.section.5" rel="Chapter" title="5 Examples"/>
-<link href="#rfc.section.5.1" rel="Chapter" title="5.1 Site directory"/>
-<link href="#rfc.section.5.2" rel="Chapter" title="5.2 Search response"/>
-<link href="#rfc.section.6" rel="Chapter" title="6 IANA Considerations"/>
-<link href="#rfc.section.7" rel="Chapter" title="7 Security Considerations"/>
-<link href="#rfc.section.8" rel="Chapter" title="8 Acknowledgements"/>
-<link href="#rfc.references" rel="Chapter" title="9 References"/>
-<link href="#rfc.references.1" rel="Chapter" title="9.1 Normative References"/>
-<link href="#rfc.references.2" rel="Chapter" title="9.2 Informative References"/>
+<link href="#rfc.section.4" rel="Chapter" title="4 Authentication and Authorization"/>
+<link href="#rfc.section.5" rel="Chapter" title="5 API Conventions"/>
+<link href="#rfc.section.5.1" rel="Chapter" title="5.1 Grammar and Format Constraints"/>
+<link href="#rfc.section.5.1.1" rel="Chapter" title="5.1.1 URI syntax"/>
+<link href="#rfc.section.5.1.2" rel="Chapter" title="5.1.2 Request/response grammar"/>
+<link href="#rfc.section.5.1.3" rel="Chapter" title="5.1.3 Data and field formats"/>
+<link href="#rfc.section.5.2" rel="Chapter" title="5.2 Requests"/>
+<link href="#rfc.section.5.2.1" rel="Chapter" title="5.2.1 Resource references"/>
+<link href="#rfc.section.5.2.2" rel="Chapter" title="5.2.2 Request methods"/>
+<link href="#rfc.section.5.2.3" rel="Chapter" title="5.2.3 Header Options"/>
+<link href="#rfc.section.5.2.4" rel="Chapter" title="5.2.4 Query string options"/>
+<link href="#rfc.section.5.3" rel="Chapter" title="5.3 Request methods"/>
+<link href="#rfc.section.5.4" rel="Chapter" title="5.4 Responses"/>
+<link href="#rfc.section.5.4.1" rel="Chapter" title="5.4.1 Response structure"/>
+<link href="#rfc.section.5.4.2" rel="Chapter" title="5.4.2 Response codes"/>
+<link href="#rfc.section.6" rel="Chapter" title="6 Examples"/>
+<link href="#rfc.section.6.1" rel="Chapter" title="6.1 Site directory"/>
+<link href="#rfc.section.6.2" rel="Chapter" title="6.2 Search response"/>
+<link href="#rfc.section.7" rel="Chapter" title="7 IANA Considerations"/>
+<link href="#rfc.section.8" rel="Chapter" title="8 Security Considerations"/>
+<link href="#rfc.section.9" rel="Chapter" title="9 Acknowledgements"/>
+<link href="#rfc.references" rel="Chapter" title="10 References"/>
+<link href="#rfc.references.1" rel="Chapter" title="10.1 Normative References"/>
+<link href="#rfc.references.2" rel="Chapter" title="10.2 Informative References"/>
 <link href="#rfc.authors" rel="Chapter"/>
 
 
@@ -398,7 +409,7 @@
 
   <meta name="dct.creator" content="Fox, J., Ed. and J. Fox" />
   <meta name="dct.identifier" content="urn:ietf:id:ciferproject-org-framework-api-v1-draft-00" />
-  <meta name="dct.issued" scheme="ISO8601" content="2014-2-10" />
+  <meta name="dct.issued" scheme="ISO8601" content="2014-4-1" />
   <meta name="dct.abstract" content="The CIFER API Framework gives a consistant look, feel, syntax and nomenclature to all of the various CIFER resource representations." />
   <meta name="description" content="The CIFER API Framework gives a consistant look, feel, syntax and nomenclature to all of the various CIFER resource representations." />
 
@@ -422,8 +433,8 @@
   <td class="right">ciferproject.org</td>
 </tr>
 <tr>
-  <td class="left">Expires: August 14, 2014</td>
-  <td class="right">February 10, 2014</td>
+  <td class="left">Expires: October 3, 2014</td>
+  <td class="right">April 1, 2014</td>
 </tr>
 
     	
@@ -443,7 +454,7 @@
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on August 14, 2014.</p>
+<p>This Internet-Draft will expire on October 3, 2014.</p>
 <h1 id="rfc.copyrightnotice">
   <a href="#rfc.copyrightnotice">Copyright Notice</a>
 </h1>
@@ -458,19 +469,30 @@
   	<li>1.   <a href="#rfc.section.1">Introduction</a></li>
 <li>2.   <a href="#rfc.section.2">Definitions</a></li>
 <li>3.   <a href="#rfc.section.3">Requirements Language</a></li>
-<li>4.   <a href="#rfc.section.4">API Conventions</a></li>
-<li>4.1.   <a href="#rfc.section.4.1">Representations</a></li>
-<li>4.2.   <a href="#rfc.section.4.2">Requests</a></li>
-<li>4.3.   <a href="#rfc.section.4.3">Responses</a></li>
-<li>5.   <a href="#rfc.section.5">Examples</a></li>
-<li>5.1.   <a href="#rfc.section.5.1">Site directory</a></li>
-<li>5.2.   <a href="#rfc.section.5.2">Search response</a></li>
-<li>6.   <a href="#rfc.section.6">IANA Considerations</a></li>
-<li>7.   <a href="#rfc.section.7">Security Considerations</a></li>
-<li>8.   <a href="#rfc.section.8">Acknowledgements</a></li>
-<li>9.   <a href="#rfc.references">References</a></li>
-<li>9.1.   <a href="#rfc.references.1">Normative References</a></li>
-<li>9.2.   <a href="#rfc.references.2">Informative References</a></li>
+<li>4.   <a href="#rfc.section.4">Authentication and Authorization</a></li>
+<li>5.   <a href="#rfc.section.5">API Conventions</a></li>
+<li>5.1.   <a href="#rfc.section.5.1">Grammar and Format Constraints</a></li>
+<li>5.1.1.   <a href="#rfc.section.5.1.1">URI syntax</a></li>
+<li>5.1.2.   <a href="#rfc.section.5.1.2">Request/response grammar</a></li>
+<li>5.1.3.   <a href="#rfc.section.5.1.3">Data and field formats</a></li>
+<li>5.2.   <a href="#rfc.section.5.2">Requests</a></li>
+<li>5.2.1.   <a href="#rfc.section.5.2.1">Resource references</a></li>
+<li>5.2.2.   <a href="#rfc.section.5.2.2">Request methods</a></li>
+<li>5.2.3.   <a href="#rfc.section.5.2.3">Header Options</a></li>
+<li>5.2.4.   <a href="#rfc.section.5.2.4">Query string options</a></li>
+<li>5.3.   <a href="#rfc.section.5.3">Request methods</a></li>
+<li>5.4.   <a href="#rfc.section.5.4">Responses</a></li>
+<li>5.4.1.   <a href="#rfc.section.5.4.1">Response structure</a></li>
+<li>5.4.2.   <a href="#rfc.section.5.4.2">Response codes</a></li>
+<li>6.   <a href="#rfc.section.6">Examples</a></li>
+<li>6.1.   <a href="#rfc.section.6.1">Site directory</a></li>
+<li>6.2.   <a href="#rfc.section.6.2">Search response</a></li>
+<li>7.   <a href="#rfc.section.7">IANA Considerations</a></li>
+<li>8.   <a href="#rfc.section.8">Security Considerations</a></li>
+<li>9.   <a href="#rfc.section.9">Acknowledgements</a></li>
+<li>10.   <a href="#rfc.references">References</a></li>
+<li>10.1.   <a href="#rfc.references.1">Normative References</a></li>
+<li>10.2.   <a href="#rfc.references.2">Informative References</a></li>
 <li><a href="#rfc.authors">Authors' Addresses</a></li>
 
 
@@ -483,7 +505,7 @@
 
 <dl>
   <dt>RESTful</dt>
-  <dd style="margin-left: 8">A RESTful service is composed of resources.  The state of a resource is defined by one or more representations and identified by one or more URIs.</dd>
+  <dd style="margin-left: 8">This framework references Representational State Transfer (REST), where a service is composed of an addressable set of resources.  URIs are used to address resources and transitions of a resources state are accomplished by direct, stateless client interactions with these URIs.  </dd>
   <dt></dt>
   <dd style="margin-left: 8">Clients of the service may:</dd>
   <dt></dt>
@@ -501,61 +523,120 @@
 <p> </p>
 <h1 id="rfc.section.3"><a href="#rfc.section.3">3.</a> Requirements Language</h1>
 <p id="rfc.section.3.p.1">The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in <a href="#RFC2119">RFC 2119</a> <cite title="NONE">[RFC2119]</cite>.</p>
-<h1 id="rfc.section.4"><a href="#rfc.section.4">4.</a> API Conventions</h1>
-<h1 id="rfc.section.4.1"><a href="#rfc.section.4.1">4.1.</a> Representations</h1>
-<p id="rfc.section.4.1.p.1">Representations in the CIFER APIs follow these conventions, except as noted in a specific API document.</p>
+<h1 id="rfc.section.4"><a href="#rfc.section.4">4.</a> Authentication and Authorization</h1>
+<p id="rfc.section.4.p.1">tbd</p>
+<h1 id="rfc.section.5"><a href="#rfc.section.5">5.</a> API Conventions</h1>
+<h1 id="rfc.section.5.1"><a href="#rfc.section.5.1">5.1.</a> Grammar and Format Constraints</h1>
+<h1 id="rfc.section.5.1.1"><a href="#rfc.section.5.1.1">5.1.1.</a> URI syntax</h1>
+<p id="rfc.section.5.1.1.p.1">A major version of a particular CIFER API must be indicated in the URI path (for example, "/v2/").  A major version will differentiate incompatible representations,  parameters or headers.  A major version change is also indicated by a change in field type.  Any minor version will be indicated in the response metadata not in the URI path (see response section below).  </p>
+<h1 id="rfc.section.5.1.2"><a href="#rfc.section.5.1.2">5.1.2.</a> Request/response grammar</h1>
 <p/>
 
 <ol>
-  <li>Character set is UTF-8.</li>
-  <li>Default language is JSON.  XML is optional.</li>
-  <li>Server major versions are indicated in the URI path, e.g. /v2/, and differentiate incompatible representations,  parameters or headers.</li>
-  <li>Minor versioning is indicated in the responseMetadata---not in the URL.</li>
-  <li>Field names are camelCase (including acronyms), e.g. "selfUri"</li>
-  <li>Field names must start with a letter. They can contain upper/lower letters, numbers and underscores.</li>
-  <li>Field type, e.g. string, date,..., cannot change without a major version change.</li>
-  <li>Timestamps are ISO 8601, e.g.: 2012-10-04T03:10:14.123Z</li>
-  <li>Durations are ISO 8601, e.g.: P1.81S</li>
-  <li>Objects are identified by uri <ul><li>e.g.: netId:mchyzer, or userId:12345678</li></ul><p> </p></li>
-  <li>The suggested hierarchical path separator is a colon ":".  <ul><li>An actual colon in a name part is represented by slash-colon ("\:").</li></ul><p> </p></li>
+  <li>Default representation language is Javascript Object Notation (JSON).</li>
+  <li>XML can be requested, but support is not required.</li>
 </ol>
 
 <p> </p>
-<h1 id="rfc.section.4.2"><a href="#rfc.section.4.2">4.2.</a> Requests</h1>
-<p id="rfc.section.4.2.p.1">Requests in the CIFER APIs follow these conventions, except as noted in a specific API document.</p>
+<h1 id="rfc.section.5.1.3"><a href="#rfc.section.5.1.3">5.1.3.</a> Data and field formats</h1>
 <p/>
 
 <ol>
-  <li>Full resources are identified by URI authority and path---not by query string or fragment.</li>
-  <li>The URL of a partial resource, e.g., a paged response, is further identified by query string parameters.</li>
-  <li>An XML representation may requested by header: <ul><li>Accept: text/xml</li></ul><p> </p></li>
-  <li>If the request method is POST, the method may be overridden by a header: <ul><li>X-HTTP-Method-Override: GET | PUT | DELETE</li></ul><p> </p></li>
-  <li>A client may request to "act as" another user  via a header: <ul><li>X-CIFER-Act-As: user_uri</li></ul><p> </p></li>
-  <li>A client may define or override request headers with query string parameters <ul><li>e.g.: "&amp;Accept=application%2Fjson&amp;"</li></ul><p> </p></li>
-  <li>Boolean parameters are generously interpreted: <ul><li>true|false,  or t|f or yes|no,  or y|n or 1|0, case insensitive</li></ul><p> </p></li>
-  <li>Use of ETag and If-Match: <ul><li>A request to replace a resource must specify an If-Match header.  <ul><li>The value must match the resource's current ETag value, or</li><li>The value may be a 'match-any' wildcard, '*'</li><li>Acceptance of wildcard is service dependent.</li><li>A request to add a resource must not specify an If-Match header.</li></ul><p> </p></li></ul><p> </p></li>
-  <li>A PUT request need not specify all attributes.  <ul><li>Replacing a resource will not affect unspecified attributes.</li><li>A necessary attribute not specified will return an error 400.</li></ul><p> </p></li>
+  <li>Character set is Unicode, encoded as UTF-8.</li>
+  <li>imestamp representations will comply with ISO 8601.  For example: 2012-10-04T03:10:14.123Z</li>
+  <li>Durations also comply with ISO 8601, For example: P1.81S</li>
+  <li>Field names are camelCase (including acronyms), e.g. "selfUri"</li>
+  <li>Field names must start with a letter. They can contain upper/lower letters, numbers and underscores.</li>
+  <li>Field types must stay consistent within a major version.</li>
+  <li>Objects are identified by uri <ul><li>For example: netId:mchyzer, or userId:12345678</li></ul><p> </p></li>
+</ol>
+
+<p> </p>
+<h1 id="rfc.section.5.2"><a href="#rfc.section.5.2">5.2.</a> Requests</h1>
+<h1 id="rfc.section.5.2.1"><a href="#rfc.section.5.2.1">5.2.1.</a> Resource references</h1>
+<p id="rfc.section.5.2.1.p.1">CIFER APIs accommodate large responses by recognizing full and partial resources.</p>
+<p/>
+
+<ol>
+  <li>A full resource, where the response is the full resource requested, must be identified by a URI only, not by query string or fragment.</li>
+  <li>A partial resource, like a response that is better served across pages, is identified by a URI that contains at least one additional query string parameter (see paging options in query string options section below).</li>
+</ol>
+
+<p> </p>
+<h1 id="rfc.section.5.2.2"><a href="#rfc.section.5.2.2">5.2.2.</a> Request methods</h1>
+<p/>
+
+<ol>
+  <li>The request method of POST overridden by a header (see header options below).</li>
+  <li>A PUT request need not specify all attributes.  <ol><li>Replacing a resource will not affect attributes not specified in the request.</li><li>A necessary attribute not specified will return an error 400 (see response codes below).</li></ol><p> </p></li>
   <li>Searches return resource URIs and default resource attributes.  <ul><li>Each service will document the fields returns on searches.</li><li>Searches may request "&amp;extraFields=field3,field4,..&amp;" to get those fields in addition to the default set.</li><li>Searches may request "&amp;omitFields=field3,field4,..&amp;" to omit those fields from the default set.</li><li>Support for these features is optional.</li></ul><p> </p></li>
   <li>Searches may specify paging options by QS parameters <ul><li>pageLimit: Number of entries per page</li><li>pageOffset: page number, first page is zero</li></ul><p> </p></li>
+</ol>
+
+<p> </p>
+<h1 id="rfc.section.5.2.3"><a href="#rfc.section.5.2.3">5.2.3.</a> Header Options</h1>
+<p/>
+
+<ol>
+  <li>The request method of POST may be overridden by the header: <ul><li>X-HTTP-Method-Override: GET | PUT | DELETE</li></ul><p> </p></li>
+  <li>XML representation may requested by header: <ul><li>Accept: text/xml</li></ul><p> </p></li>
+  <li>Use of ETag and If-Match: <ul><li>A request to replace a resource must specify an If-Match header.  <ul><li>The value must match the resource's current ETag value, or</li><li>The value may be a 'match-any' wildcard, '*'</li><li>Acceptance of wildcard is service dependent.</li><li>A request to add a resource must not specify an If-Match header.</li></ul><p> </p></li></ul><p> </p></li>
+  <li>A client may request to "act as" another user  via a header: <ul><li>X-CIFER-Act-As: user_uri</li></ul><p> </p></li>
+</ol>
+
+<p> </p>
+<h1 id="rfc.section.5.2.4"><a href="#rfc.section.5.2.4">5.2.4.</a> Query string options</h1>
+<p/>
+
+<ol>
+  <li>A client may define or override request headers with query string parameters <ul><li>e.g.: "&amp;Accept=application%2Fjson&amp;"</li></ul><p> </p></li>
   <li>Requests may specify field filters on returned resources.  <ul><li>Query string may specify a list desired fields: "&amp;fields=field1,field2,...&amp;" </li><li>A requests for an unknown field is not an error.</li><li>Support for this features is optional.</li></ul><p> </p></li>
   <li>Requests for large resources, e.g. group membership,  may specify paging parameters <ul><li>sortField:</li><li>sortOrder: 'a*', 'd*', case insensitive</li><li>pageLimit: number of entries per page, zero means no paging</li><li>Mutually exclusive page start: <ul><li>pageOffset: page number, starting with zero, OR</li><li>pageStartValue: first value returned will be the one AFTER this value</li></ul><p> </p></li><li>The service may provide default paging parameters, and may reduce the requested limits.</li></ul><p> </p></li>
+  <li>Boolean parameters are generously interpreted: <ul><li>true|false,  or t|f or yes|no,  or y|n or 1|0, case insensitive</li></ul><p> </p></li>
   <li>A client may request a pretty-printed response with the query string, "indent=true".</li>
   <li>Unexpected Query String parameters will be ignored.</li>
 </ol>
 
 <p> </p>
-<h1 id="rfc.section.4.3"><a href="#rfc.section.4.3">4.3.</a> Responses</h1>
-<p id="rfc.section.4.3.p.1">Responses in the CIFER APIs follow these conventions, except as noted in a specific API document.</p>
+<h1 id="rfc.section.5.3"><a href="#rfc.section.5.3">5.3.</a> Request methods</h1>
+<p id="rfc.section.5.3.p.1">While most browser facing web sites are nowadays discoverable from the root resource, there never was a time when an application could be completely discovered through its API.</p>
 <p/>
 
 <ol>
-  <li>Resources are wrapped in an object which contains: <ul><li>resourceMetadata: metadata about the resource. fields as appropriate to the resource <ul><li>lastModified: timestamp when the resource was modified</li><li>selfUri: URI to the current resource.</li><li>ETag, or equivalent, for resources that can be replaced, ...</li></ul><p> </p></li><li>responseMetadata: metadata about this particular response <ul><li>responseTimestamp:</li><li>responseTime: time that the server took in processing this request</li><li>requestCommentary: freeform text about the request that the server processed (for debug)</li><li>httpStatusCode: response status as an HTTP status code.</li><li>serverVersion: major.minor server version number</li><li>paging parameters <ul><li>pageLimit</li><li>pageOffest</li><li>sortField</li><li>pageOffsetValue</li><li>sortOrder</li></ul><p> </p></li><li>...</li></ul><p> </p></li><li>resource: The actual resource for the request.</li></ul><p> </p></li>
-  <li>Response codes: <ul><li>200: the resource was found</li><li>201: the resource was created</li><li>400: the request was not valid</li><li>401: the client was unauthenticated</li><li>403: an authenticated client was not authorized for the request</li><li>409: (conflict) <ul><li>PUT to an existing resource without an If-Match</li></ul><p> </p></li><li>412: (precondition failed) <ul><li>If-Match header did not match resource's ETag, or</li><li>If-Match header supplied but resource not found (add with an if-match), or</li><li>wildcard if-match not allowed</li></ul><p> </p></li><li>500: server error</li></ul><p> </p></li>
+  <li>The complexity of resources, authorizations, capabilities, and interactions requires, often extensive, external documentation of the application.</li>
+  <li>To be efficient a client often must be able to directly address a resource.</li>
 </ol>
 
 <p> </p>
-<h1 id="rfc.section.5"><a href="#rfc.section.5">5.</a> Examples</h1>
-<h1 id="rfc.section.5.1"><a href="#rfc.section.5.1">5.1.</a> Site directory</h1>
+<p id="rfc.section.5.3.p.3">These considerations indicate that a root resource, with links to version resources, with links to other resource URLs will in almost all cases be bypassed by clients.  User readable API documentation will specify direct, if relative, links directly to most of the individual resources. </p>
+<p id="rfc.section.5.3.p.4">The framework does not specify these root and directory representations, except that they follow the general request and response guidelines.  A root page may be used to provide general information about the application instance:  what version it supports; whether or not it supports XML representation; etc.</p>
+<h1 id="rfc.section.5.4"><a href="#rfc.section.5.4">5.4.</a> Responses</h1>
+<h1 id="rfc.section.5.4.1"><a href="#rfc.section.5.4.1">5.4.1.</a> Response structure</h1>
+<p id="rfc.section.5.4.1.p.1">Resources are returned along with metadata about the resource and metadata about the response (see JSON examples that follow)</p>
+<p/>
+
+<ol>
+  <li>Resources are wrapped in an object which contains: <ol><li>resource: The actual resource for the request.</li><li>resourceMetadata: metadata about the resource. fields as appropriate to the resource <ul><li>lastModified: timestamp when the resource was modified</li><li>selfUri: URI to the current resource.</li><li>ETag, or equivalent, for resources that can be replaced, ...</li></ul><p> </p></li><li>responseMetadata: metadata about this particular response <ul><li>responseTimestamp:</li><li>responseTime: time that the server took in processing this request</li><li>requestCommentary: freeform text about the request that the server processed (for debug)</li><li>httpStatusCode: response status as an HTTP status code.</li><li>serverVersion: major.minor server version number</li><li>paging parameters <ul><li>pageLimit</li><li>pageOffest</li><li>sortField</li><li>pageOffsetValue</li><li>sortOrder</li></ul><p> </p></li></ul><p> </p></li></ol><p> </p></li>
+</ol>
+
+<p> </p>
+<h1 id="rfc.section.5.4.2"><a href="#rfc.section.5.4.2">5.4.2.</a> Response codes</h1>
+<p/>
+
+<ol>
+  <li>200: the resource was found</li>
+  <li>201: the resource was created</li>
+  <li>400: the request was not valid</li>
+  <li>401: the client was unauthenticated</li>
+  <li>403: an authenticated client was not authorized for the request</li>
+  <li>409: (conflict) <ul><li>PUT to an existing resource without an If-Match</li></ul><p> </p></li>
+  <li>412: (precondition failed) <ul><li>If-Match header did not match resource's ETag, or</li><li>If-Match header supplied but resource not found (add with an if-match), or</li><li>wildcard if-match not allowed</li></ul><p> </p></li>
+  <li>500: server error</li>
+</ol>
+
+<p> </p>
+<h1 id="rfc.section.6"><a href="#rfc.section.6">6.</a> Examples</h1>
+<h1 id="rfc.section.6.1"><a href="#rfc.section.6.1">6.1.</a> Site directory</h1>
 <p>What might be returned by a top-level GET to a service.</p>
 <pre>
 {
@@ -576,7 +657,7 @@
   }
 }
      </pre>
-<h1 id="rfc.section.5.2"><a href="#rfc.section.5.2">5.2.</a> Search response</h1>
+<h1 id="rfc.section.6.2"><a href="#rfc.section.6.2">6.2.</a> Search response</h1>
 <p>What might be returned by a search GET to a service.</p>
 <pre>
 {
@@ -613,14 +694,14 @@
   }
 }
      </pre>
-<h1 id="rfc.section.6"><a href="#rfc.section.6">6.</a> <a href="#IANA" id="IANA">IANA Considerations</a></h1>
-<p id="rfc.section.6.p.1">This memo includes no request to IANA.</p>
-<h1 id="rfc.section.7"><a href="#rfc.section.7">7.</a> <a href="#Security" id="Security">Security Considerations</a></h1>
-<p id="rfc.section.7.p.1">The API framework does not specify how services identify their clients.</p>
-<h1 id="rfc.section.8"><a href="#rfc.section.8">8.</a> <a href="#Acknowledgements" id="Acknowledgements">Acknowledgements</a></h1>
-<p id="rfc.section.8.p.1">This document was produced by the CIFER Shared API work team. People who made particular contributions to the work include Jim Fox, Keith Hazelton, Chris Hyzer, Benn Oshrin, Jonathan Pass and Jimmy Vuccolo</p>
-<h1 id="rfc.references"><a href="#rfc.references">9.</a> References</h1>
-<h1 id="rfc.references.1"><a href="#rfc.references.1">9.1.</a> Normative References</h1>
+<h1 id="rfc.section.7"><a href="#rfc.section.7">7.</a> <a href="#IANA" id="IANA">IANA Considerations</a></h1>
+<p id="rfc.section.7.p.1">This memo includes no request to IANA.</p>
+<h1 id="rfc.section.8"><a href="#rfc.section.8">8.</a> <a href="#Security" id="Security">Security Considerations</a></h1>
+<p id="rfc.section.8.p.1">The API framework does not specify how services identify their clients.</p>
+<h1 id="rfc.section.9"><a href="#rfc.section.9">9.</a> <a href="#Acknowledgements" id="Acknowledgements">Acknowledgements</a></h1>
+<p id="rfc.section.9.p.1">This document was produced by the CIFER Shared API work team. People who made particular contributions to the work include Jim Fox, Keith Hazelton, Chris Hyzer, Benn Oshrin, Jonathan Pass and Jimmy Vuccolo</p>
+<h1 id="rfc.references"><a href="#rfc.references">10.</a> References</h1>
+<h1 id="rfc.references.1"><a href="#rfc.references.1">10.1.</a> Normative References</h1>
 <table>
   <tbody>
     <tr>
@@ -631,7 +712,7 @@
     </tr>
   </tbody>
 </table>
-<h1 id="rfc.references.2"><a href="#rfc.references.2">9.2.</a> Informative References</h1>
+<h1 id="rfc.references.2"><a href="#rfc.references.2">10.2.</a> Informative References</h1>
 <table>
   <tbody>
     <tr>

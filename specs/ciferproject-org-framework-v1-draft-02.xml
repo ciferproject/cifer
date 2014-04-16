@@ -1,0 +1,491 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<!-- This template is for creating an Internet Draft using xml2rfc, which is available here: http://xml.resource.org. -->
+
+<!-- external refs -->
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
+<!ENTITY RFC2119 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml">
+<!ENTITY RFC2629 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2629.xml">
+<!ENTITY RFC3552 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.3552.xml">
+]>
+
+<?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
+<?rfc strict="yes" ?>
+<?rfc toc="yes"?>
+<?rfc tocdepth="4"?>
+<?rfc symrefs="yes"?>
+<?rfc sortrefs="yes" ?>
+<?rfc compact="yes" ?>
+<?rfc subcompact="yes" ?>
+<?rfc linkmailto="yes" ?>
+<rfc category="info" docName="ciferproject-org-framework-api-v1-draft-02" ipr="trust200902">
+  <!-- category values: std, bcp, info, exp, and historic
+     ipr values: see xml.resource.org for up-to-date list
+     you can add the attributes updates="NNNN" and obsoletes="NNNN" 
+     they will automatically be output with "(if approved)" -->
+
+  <!-- ***** FRONT MATTER ***** -->
+
+  <front>
+    <!-- The abbreviated title is used in the page header - it is only necessary if the 
+         full title is longer than 39 characters -->
+
+    <title abbrev="API Framework">CIFER API Framework 01</title>
+
+    <!-- add 'role="editor"' below for the editors if appropriate -->
+
+    <!-- Another author who claims to be an editor -->
+
+    <author fullname="Jim Fox" initials="J." surname="Fox" role="editor">
+      <organization>ciferproject.org</organization>
+
+      <address>
+        <postal>
+          <street>4333 Brooklyn Ave NE</street>
+
+          <!-- Reorder these if your country does things differently -->
+
+          <city>Seattle</city>
+          <region>Washington</region>
+          <code>98195</code>
+          <country>US</country>
+        </postal>
+        <phone>+1 206 543 4320</phone>
+        <email>fox@uw.edu</email>
+      </address>
+    </author>
+    <author fullname="Jim Fox" initials="J." surname="Fox">
+      <organization>ciferproject.org</organization>
+
+      <address>
+       <email>fox@uw.edu</email>
+      </address>
+    </author>
+
+    <date year="2014" />
+
+    <!-- If the month and year are both specified and are the current ones, xml2rfc will fill 
+         in the current day for you. If only the current year is specified, xml2rfc will fill 
+	 in the current day and month for you. If the year is not the current one, it is 
+	 necessary to specify at least a month (xml2rfc assumes day="1" if not specified for the 
+	 purpose of calculating the expiry date).  With drafts it is normally sufficient to 
+	 specify just the year. -->
+
+    <!-- Meta-data Declarations -->
+
+    <area>General</area>
+
+    <workgroup>Internet Engineering Task Force</workgroup>
+
+    <!-- WG name at the upperleft corner of the doc,
+         IETF is fine for individual submissions.  
+	 If this element is not present, the default is "Network Working Group",
+         which is used by the RFC Editor as a nod to the history of the IETF. -->
+
+    <keyword>CIFER</keyword>
+    <keyword>REST</keyword>
+    <keyword>API</keyword>
+
+    <abstract>
+      <t>The CIFER API Framework gives a consistant look, feel, syntax and nomenclature 
+      to all of the various CIFER resource representations.</t>
+    </abstract>
+  </front>
+
+  <middle>
+    <section title="Introduction">
+      <t>The <xref target="CIFER" /> initiative includes work to define a set of shared APIs for core functions in identity and access management. 
+One desired feature of such systems is a consistancy tructure and vocabulary of API URLs and representations.
+      </t>
+    </section>
+   <section title="Definitions">
+     <t>
+      <list style="hanging">
+        <t hangText="RESTful">This framework references Representational State Transfer (REST), where a service is composed of an addressable set of resources.  URIs are used to address resources and transitions of a resources state are accomplished by direct, stateless client interactions with these URIs.
+         </t>
+       <t>Clients of the service may:</t>
+        <t>
+         <list style="symbols">
+          <t>Search for resources,</t>
+          <t>Get a representation of a resource,</t>
+          <t>Add or replace a resource, and</t>
+          <t>Delete a resource.</t>
+         </list>
+        </t>
+    </list>
+   </t>
+   </section>
+    
+
+ <section title="Requirements Language">
+        <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+        "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+        document are to be interpreted as described in <xref
+        target="RFC2119">RFC 2119</xref>.</t>
+ </section>
+
+ <section title="Authentication and Authorization">
+    <t>All REST API calls MUST take place over HTTPS. Defined mechanisms MUST be in place to establish trust in the underlying keys.</t>
+ </section>
+
+
+ <section title="API Conventions">
+   <section title="Grammar and Format Constraints">
+     <section title="URI syntax">
+       <t>
+        A major version of a particular CIFER API must be indicated in the URI path
+         (for example, "/v2/").  A major version will differentiate incompatible representations,  parameters or headers.  
+        A major version change is also indicated by a change in field type.
+        Any minor version will be indicated in the response metadata not in the URI path (see response section below).
+       </t>
+     </section>
+     <section title="Request/response grammar">
+       <t>
+        <list style="numbers">
+          <t>Default representation language is Javascript Object Notation (JSON).</t>
+          <t>XML can be requested, but support is not required.</t>
+        </list>
+       </t>
+     </section>
+     <section title="Data and field formats">
+       <t>
+       <list style="numbers">
+         <t>Character set is Unicode, encoded as UTF-8.</t>
+         <t>imestamp representations will comply with ISO 8601.  For example: 2012-10-04T03:10:14.123Z</t>
+         <t>Durations also comply with ISO 8601, For example: P1.81S</t>
+         <t>Field names are camelCase (including acronyms), e.g. "selfUri"</t>
+         <t>Field names must start with a letter. They can contain upper/lower letters, numbers and underscores.</t>
+         <t>Field types must stay consistent within a major version.</t>
+         <t>Objects are identified by uri
+           <list style="symbols">
+             <t>For example: netId:mchyzer, or userId:12345678</t>
+           </list>
+         </t>
+        </list>
+       </t>
+      </section>
+   </section>
+
+   <section title="Requests">
+     <section title="Resource references">
+       <t>CIFER APIs accommodate large responses by recognizing full and partial resources.</t>
+       <t>
+       <list style="numbers">
+         <t>A full resource, where the response is the full resource requested, must be identified by a URI only, not by query string or fragment.</t>
+         <t>A partial resource, like a response that is better served across pages, is identified by a URI that contains at least one additional query string parameter (see paging options in query string options section below).</t>
+        </list>
+       </t>
+      </section>
+
+     <section title="Request methods">
+       <t>
+       <list style="numbers">
+       <t>The request method of POST overridden by a header (see header options below).</t>
+       <t>A PUT request need not specify all attributes.
+         <list style="numbers">
+            <t>Replacing a resource will not affect attributes not specified in the request.</t>
+            <t>A necessary attribute not specified will return an error 400 (see response codes below).</t>
+         </list>
+       </t>
+       <t>Searches return resource URIs and default resource attributes.
+        <list style="symbols">
+         <t>Each service will document the fields returns on searches.</t>
+         <t>Searches may request "&amp;extraFields=field3,field4,..&amp;" to get those fields in addition to the default set.</t>
+         <t>Searches may request "&amp;omitFields=field3,field4,..&amp;" to omit those fields from the default set.</t>
+         <t>Support for these features is optional.</t>
+        </list>
+       </t>
+       <t>Searches may specify paging options by QS parameters
+        <list style="symbols">
+         <t>pageLimit: Number of entries per page</t>
+         <t>pageOffset: page number, first page is zero</t>
+        </list>
+       </t>
+       </list>
+       </t>
+      </section>
+
+     <section title="Header Options">
+       <t>
+       <list style="numbers">
+
+       <t>The request method of POST may be overridden by the header:
+        <list style="symbols">
+         <t>X-HTTP-Method-Override: GET | PUT | DELETE</t>
+        </list>
+       </t>
+
+       <t>XML representation may requested by header:
+        <list style="symbols">
+         <t>Accept: text/xml</t>
+        </list>
+       </t>
+
+       <t>Use of ETag and If-Match:
+        <list style="symbols">
+         <t>A request to replace a resource must specify an If-Match header.
+          <list style="symbols">
+           <t>The value must match the resource's current ETag value, or</t>
+           <t>The value may be a 'match-any' wildcard, '*'</t>
+           <t>Acceptance of wildcard is service dependent.</t>
+           <t>A request to add a resource must not specify an If-Match header.</t>
+          </list>
+         </t>
+        </list>
+       </t>
+
+       <t>A client may request to "act as" another user  via a header:
+        <list style="symbols">
+         <t>X-CIFER-Act-As: user_uri</t>
+        </list>
+       </t>
+
+       </list>
+       </t>
+      </section>
+
+     <section title="Query string options">
+       <t>
+       <list style="numbers">
+       <t>A client may define or override request headers with query string parameters
+        <list style="symbols">
+         <t>e.g.: "&amp;Accept=application%2Fjson&amp;"</t>
+        </list>
+       </t>
+
+       <t>Requests may specify field filters on returned resources.
+        <list style="symbols">
+         <t>Query string may specify a list desired fields: "&amp;fields=field1,field2,...&amp;" </t>
+         <t>A requests for an unknown field is not an error.</t>
+         <t>Support for this features is optional.</t> 
+        </list>
+       </t>
+       <t>Requests for large resources, e.g. group membership,  may specify paging parameters
+        <list style="symbols">
+         <t>sortField:</t>
+         <t>sortOrder: 'a*', 'd*', case insensitive</t>
+         <t>pageLimit: number of entries per page, zero means no paging</t>
+         <t>Mutually exclusive page start:
+           <list style="symbols">
+            <t>pageOffset: page number, starting with zero, OR</t>
+            <t>pageStartValue: first value returned will be the one AFTER this value</t>
+           </list>
+         </t>
+         <t>The service may provide default paging parameters, and may reduce the requested limits.</t>
+        </list>
+       </t>
+       <t>Boolean parameters are generously interpreted:
+        <list style="symbols">
+         <t>true|false,  or t|f or yes|no,  or y|n or 1|0, case insensitive</t>
+        </list>
+       </t>
+
+       <t>A client may request a pretty-printed response with the query string, "indent=true".</t>
+       <t>Unexpected Query String parameters will be ignored.</t> 
+       </list>
+      </t>
+
+     </section>
+
+   </section>
+
+     <section title="Request methods">
+       <t>While most browser facing web sites are nowadays discoverable from the root resource, there never was a time when an application could be completely discovered through its API.</t>
+       <t>
+       <list style="numbers">
+        <t>The complexity of resources, authorizations, capabilities, and interactions requires, often extensive, external documentation of the application.</t>
+        <t>To be efficient a client often must be able to directly address a resource.</t>
+       </list>
+       </t>
+      <t>These considerations indicate that a root resource, with links to version resources, with links to other resource URLs will in almost all cases be bypassed by clients.  User readable API documentation will specify direct, if relative, links directly to most of the individual resources. </t>      <t>The framework does not specify these root and directory representations, except that they follow the general request and response guidelines.  A root page may be used to provide general information about the application instance:  what version it supports; whether or not it supports XML representation; etc.</t>
+
+      </section>
+
+
+   <section title="Responses">
+     <section title="Response structure">
+       <t>Resources are returned along with metadata about the resource and metadata about the response (see JSON examples that follow)</t>
+       <t>
+       <list style="numbers">
+       <t>Resources are wrapped in an object which contains:
+         <list style="numbers">
+           <t>resource: The actual resource for the request.</t> 
+           <t>resourceMetadata: metadata about the resource. fields as appropriate to the resource
+            <list style="symbols">
+             <t>lastModified: timestamp when the resource was modified</t>
+             <t>selfUri: URI to the current resource.</t>
+             <t>ETag, or equivalent, for resources that can be replaced, ...</t>
+            </list>
+           </t>
+           <t>responseMetadata: metadata about this particular response
+             <list style="symbols">
+              <t>responseTimestamp:</t>
+              <t>responseTime: time that the server took in processing this request</t>
+              <t>requestCommentary: freeform text about the request that the server processed (for debug)</t>
+              <t>httpStatusCode: response status as an HTTP status code.</t>
+              <t>serverVersion: major.minor server version number</t>
+              <t>paging parameters
+                <list style="symbols">
+                 <t>            pageLimit</t>
+                 <t>            pageOffest</t> 
+                 <t>            sortField</t>
+                 <t>            pageOffsetValue</t> 
+                 <t>            sortOrder</t>
+                </list>
+               </t>
+              </list>
+            </t>
+           </list>
+          </t>
+        </list>
+       </t>
+      </section>
+     <section title="Response codes">
+       <t>
+       <list style="numbers">
+          <t>200: the resource was found</t>
+          <t>201: the resource was created</t>
+          <t>400: the request was not valid</t>
+          <t>401: the client was unauthenticated</t>
+          <t>403: an authenticated client was not authorized for the request</t>
+          <t>409: (conflict)
+           <list style="symbols">
+            <t>PUT to an existing resource without an If-Match</t>
+           </list>
+          </t>
+          <t>412: (precondition failed)
+           <list style="symbols">
+            <t>If-Match header did not match resource's ETag, or</t>
+            <t>If-Match header supplied but resource not found (add with an if-match), or</t>
+            <t>wildcard if-match not allowed</t>
+           </list>
+          </t>
+          <t>500: server error</t>
+         </list>
+      </t>
+    </section>
+   </section>
+ </section>
+ 
+ <section title="Examples">
+   <section title="Site directory">
+    <figure align="center">
+     <preamble>What might be returned by a top-level GET to a service.</preamble>
+     <artwork><![CDATA[
+{
+  "resource":{
+    "people": "/people",
+    "places": "/places"
+  },
+  "resourceMetadata":{
+    "lastModified":"2012-11-04T09:57:03.541Z",
+    "baseUri":"https://example.u.edu/ppservice/v1/",
+ 
+  },
+  "responseMeta":{
+    "responseTimestamp":"2013-07-04T09:57:03.541Z",
+    "httpStatusCode":200,
+    "responseTime":"P0.011S"
+    "serverVersion":"1.1"
+  }
+}
+     ]]></artwork>
+    </figure>
+   </section>
+   <section title="Search response">
+    <figure align="center">
+     <preamble>What might be returned by a search GET to a service.</preamble>
+     <artwork><![CDATA[
+{
+  "resource":[
+   {"uuid": "3ac85497-1663-4ef4-9933-3df8bc7800bc",
+    "lastName": "Doe",
+    "givenName": "John A.",
+    "address": { ... }
+    "status": "something",
+    "uri": "/v1/people/3ac85497-1663-4ef4-9933-3df8bc7800bc"
+   },
+   {"uuid": "3ac85497-1663-4ef4-9933-3df8bc7800cc",
+    "lastName": "Doe",
+    "givenName": "John B.",
+    "address": { ... }
+    "status": "something",
+    "uri": "/v1/people/3ac85497-1663-4ef4-9933-3df8bc7800cc"
+   },
+  ],
+ 
+  "resourceMetadata":{
+    "baseUri":"https://example.u.edu/ppservice",
+    "sortOrder":"a",
+    "pageLimit":100,
+    "pageOffset":0,
+    "sortField":"name",
+    "statusCode":"SUCCESS",
+  },
+  "responseMeta":{
+    "responseTimestamp":"2013-07-04T09:57:03.541Z",
+    "httpStatusCode":200,
+    "responseTime":"P0.011S"
+    "serverVersion":"1.1"
+  }
+}
+     ]]></artwork>
+    </figure>
+   </section>
+ </section>
+
+    <section anchor="IANA" title="IANA Considerations">
+      <t>This memo includes no request to IANA.</t>
+    </section>
+
+    <section anchor="Security" title="Security Considerations">
+      <t>The API framework does not specify how services identify their clients.</t>
+    </section>
+    <section anchor="Acknowledgements" title="Acknowledgements">
+      <t>This document was produced by the CIFER Shared API work team. People who made particular contributions to the work include Jim Fox, Keith Hazelton, Chris Hyzer, Benn Oshrin, Jonathan Pass and Jimmy Vuccolo</t>
+    </section>
+
+    <!-- Possibly a 'Contributors' section ... -->
+
+  </middle>
+
+  <!--  *****BACK MATTER ***** -->
+
+  <back>
+    <!-- References split into informative and normative -->
+
+    <!-- There are 2 ways to insert reference entries from the citation libraries:
+     1. define an ENTITY at the top, and use "ampersand character"RFC2629; here (as shown)
+     2. simply use a PI "less than character"?rfc include="reference.RFC.2119.xml"?> here
+        (for I-Ds: include="reference.I-D.narten-iana-considerations-rfc2434bis.xml")
+
+     Both are cited textually in the same manner: by using xref elements.
+     If you use the PI option, xml2rfc will, by default, try to find included files in the same
+     directory as the including file. You can also define the XML_LIBRARY environment variable
+     with a value containing a set of directories to search.  These can be either in the local
+     filing system or remote ones accessed by http (http://domain/dir/... ).-->
+
+    <references title="Normative References">
+
+      &RFC2119;
+
+    </references>
+
+    <references title="Informative References">
+
+      <reference anchor="CIFER"
+                 target="http://ciferproject.org">
+        <front>
+          <title>CIFER Home Page</title>
+          <author><organization>CIFER</organization></author>
+          <date year="2014" />
+        </front>
+      </reference>
+      
+     </references>
+
+    <!-- Change Log
+
+v00 2014-02-04  KH    Initial version
+  -->
+  </back>
+</rfc>

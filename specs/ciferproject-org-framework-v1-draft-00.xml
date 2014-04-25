@@ -37,7 +37,6 @@
 
     <author fullname="Jim Fox" initials="J." surname="Fox" role="editor">
       <organization>ciferproject.org</organization>
-
       <address>
         <postal>
           <street>4333 Brooklyn Ave NE</street>
@@ -55,9 +54,38 @@
     </author>
     <author fullname="Jim Fox" initials="J." surname="Fox">
       <organization>ciferproject.org</organization>
-
       <address>
        <email>fox@uw.edu</email>
+      </address>
+    </author>
+    <author fullname="Keith Hazelton" initials="K." surname="Hazelton">
+      <organization>ciferproject.org</organization>
+      <address>
+       <email>hazelton@wisc.edu</email>
+      </address>
+    </author>
+    <author fullname="Chris Hyzer" initials="C." surname="Hyzer">
+      <organization>ciferproject.org</organization>
+      <address>
+       <email>mchyzer@isc.upenn.edu</email>
+      </address>
+    </author>
+    <author fullname="Benn Oshrin" initials="B." surname="Oshrin">
+      <organization>ciferproject.org</organization>
+      <address>
+       <email>benno@internet2.edu</email>
+      </address>
+    </author>
+    <author fullname="Bill Thompson" initials="B." surname="Thompson">
+      <organization>ciferproject.org</organization>
+      <address>
+       <email>wgthom@gmail.com</email>
+      </address>
+    </author>
+    <author fullname="Jimmy Vuccolo" initials="J." surname="Vuccolo">
+      <organization>ciferproject.org</organization>
+      <address>
+       <email>jvuccolo@psu.edu</email>
       </address>
     </author>
 
@@ -124,7 +152,18 @@ One desired feature of such systems is a consistancy tructure and vocabulary of 
  </section>
 
  <section title="Authentication and Authorization">
-    <t>tbd</t>
+    <t>
+      The framework does not specify authentication or authentication methods.
+      Some  acceptable methods include:
+      </t>
+      <t>
+       <list style="numbers">
+       <t>Basic auth over https</t>
+       <t>Client certificate auth over https</t>
+       <t>Encrypted and signed content over any transport</t>
+      </list>
+      </t>
+
  </section>
 
 
@@ -145,6 +184,8 @@ One desired feature of such systems is a consistancy tructure and vocabulary of 
           <t>XML can be requested, but support is not required.</t>
         </list>
        </t>
+
+
      </section>
      <section title="Data and field formats">
        <t>
@@ -153,6 +194,7 @@ One desired feature of such systems is a consistancy tructure and vocabulary of 
          <t>imestamp representations will comply with ISO 8601.  For example: 2012-10-04T03:10:14.123Z</t>
          <t>Durations also comply with ISO 8601, For example: P1.81S</t>
          <t>Field names are camelCase (including acronyms), e.g. "selfUri"</t>
+         <t>Where there is discretion enum and other fixed field values should be camelCase.</t>
          <t>Field names must start with a letter. They can contain upper/lower letters, numbers and underscores.</t>
          <t>Field types must stay consistent within a major version.</t>
          <t>Objects are identified by uri
@@ -246,11 +288,6 @@ One desired feature of such systems is a consistancy tructure and vocabulary of 
      <section title="Query string options">
        <t>
        <list style="numbers">
-       <t>A client may define or override request headers with query string parameters
-        <list style="symbols">
-         <t>e.g.: "&amp;Accept=application%2Fjson&amp;"</t>
-        </list>
-       </t>
 
        <t>Requests may specify field filters on returned resources.
         <list style="symbols">

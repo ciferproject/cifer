@@ -407,9 +407,9 @@
   <meta name="generator" content="xml2rfc version 2.4.5 - http://tools.ietf.org/tools/xml2rfc" />
   <link rel="schema.dct" href="http://purl.org/dc/terms/" />
 
-  <meta name="dct.creator" content="Fox, J., Ed. and J. Fox" />
+  <meta name="dct.creator" content="Fox, J., Ed., Fox, J., Hazelton, K., Hyzer, C., Oshrin, B., Thompson, B., and J. Vuccolo" />
   <meta name="dct.identifier" content="urn:ietf:id:ciferproject-org-framework-api-v1-draft-00" />
-  <meta name="dct.issued" scheme="ISO8601" content="2014-4-1" />
+  <meta name="dct.issued" scheme="ISO8601" content="2014-4-25" />
   <meta name="dct.abstract" content="The CIFER API Framework gives a consistant look, feel, syntax and nomenclature to all of the various CIFER resource representations." />
   <meta name="description" content="The CIFER API Framework gives a consistant look, feel, syntax and nomenclature to all of the various CIFER resource representations." />
 
@@ -430,11 +430,31 @@
 </tr>
 <tr>
   <td class="left">Intended status: Informational</td>
+  <td class="right">K. Hazelton</td>
+</tr>
+<tr>
+  <td class="left">Expires: October 27, 2014</td>
+  <td class="right">C. Hyzer</td>
+</tr>
+<tr>
+  <td class="left"></td>
+  <td class="right">B. Oshrin</td>
+</tr>
+<tr>
+  <td class="left"></td>
+  <td class="right">B. Thompson</td>
+</tr>
+<tr>
+  <td class="left"></td>
+  <td class="right">J. Vuccolo</td>
+</tr>
+<tr>
+  <td class="left"></td>
   <td class="right">ciferproject.org</td>
 </tr>
 <tr>
-  <td class="left">Expires: October 3, 2014</td>
-  <td class="right">April 1, 2014</td>
+  <td class="left"></td>
+  <td class="right">April 25, 2014</td>
 </tr>
 
     	
@@ -454,7 +474,7 @@
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on October 3, 2014.</p>
+<p>This Internet-Draft will expire on October 27, 2014.</p>
 <h1 id="rfc.copyrightnotice">
   <a href="#rfc.copyrightnotice">Copyright Notice</a>
 </h1>
@@ -524,7 +544,16 @@
 <h1 id="rfc.section.3"><a href="#rfc.section.3">3.</a> Requirements Language</h1>
 <p id="rfc.section.3.p.1">The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in <a href="#RFC2119">RFC 2119</a> <cite title="NONE">[RFC2119]</cite>.</p>
 <h1 id="rfc.section.4"><a href="#rfc.section.4">4.</a> Authentication and Authorization</h1>
-<p id="rfc.section.4.p.1">tbd</p>
+<p id="rfc.section.4.p.1">The framework does not specify authentication or authentication methods.  Some  acceptable methods include: </p>
+<p/>
+
+<ol>
+  <li>Basic auth over https</li>
+  <li>Client certificate auth over https</li>
+  <li>Encrypted and signed content over any transport</li>
+</ol>
+
+<p> </p>
 <h1 id="rfc.section.5"><a href="#rfc.section.5">5.</a> API Conventions</h1>
 <h1 id="rfc.section.5.1"><a href="#rfc.section.5.1">5.1.</a> Grammar and Format Constraints</h1>
 <h1 id="rfc.section.5.1.1"><a href="#rfc.section.5.1.1">5.1.1.</a> URI syntax</h1>
@@ -546,6 +575,7 @@
   <li>imestamp representations will comply with ISO 8601.  For example: 2012-10-04T03:10:14.123Z</li>
   <li>Durations also comply with ISO 8601, For example: P1.81S</li>
   <li>Field names are camelCase (including acronyms), e.g. "selfUri"</li>
+  <li>Where there is discretion enum and other fixed field values should be camelCase.</li>
   <li>Field names must start with a letter. They can contain upper/lower letters, numbers and underscores.</li>
   <li>Field types must stay consistent within a major version.</li>
   <li>Objects are identified by uri <ul><li>For example: netId:mchyzer, or userId:12345678</li></ul><p> </p></li>
@@ -589,7 +619,6 @@
 <p/>
 
 <ol>
-  <li>A client may define or override request headers with query string parameters <ul><li>e.g.: "&amp;Accept=application%2Fjson&amp;"</li></ul><p> </p></li>
   <li>Requests may specify field filters on returned resources.  <ul><li>Query string may specify a list desired fields: "&amp;fields=field1,field2,...&amp;" </li><li>A requests for an unknown field is not an error.</li><li>Support for this features is optional.</li></ul><p> </p></li>
   <li>Requests for large resources, e.g. group membership,  may specify paging parameters <ul><li>sortField:</li><li>sortOrder: 'a*', 'd*', case insensitive</li><li>pageLimit: number of entries per page, zero means no paging</li><li>Mutually exclusive page start: <ul><li>pageOffset: page number, starting with zero, OR</li><li>pageStartValue: first value returned will be the one AFTER this value</li></ul><p> </p></li><li>The service may provide default paging parameters, and may reduce the requested limits.</li></ul><p> </p></li>
   <li>Boolean parameters are generously interpreted: <ul><li>true|false,  or t|f or yes|no,  or y|n or 1|0, case insensitive</li></ul><p> </p></li>
@@ -769,6 +798,111 @@
 	  <span class="country-name vcardline"></span>
 	</span>
 	<span class="vcardline">EMail: <a href="mailto:fox@uw.edu">fox@uw.edu</a></span>
+
+  </address>
+</div><div class="avoidbreak">
+  <address class="vcard">
+	<span class="vcardline">
+	  <span class="fn">Keith Hazelton</span> 
+	  <span class="n hidden">
+		<span class="family-name">Hazelton</span>
+	  </span>
+	</span>
+	<span class="org vcardline">ciferproject.org</span>
+	<span class="adr">
+	  
+	  <span class="vcardline">
+		<span class="locality"></span> 
+		<span class="region"></span>
+		<span class="code"></span>
+	  </span>
+	  <span class="country-name vcardline"></span>
+	</span>
+	<span class="vcardline">EMail: <a href="mailto:hazelton@wisc.edu">hazelton@wisc.edu</a></span>
+
+  </address>
+</div><div class="avoidbreak">
+  <address class="vcard">
+	<span class="vcardline">
+	  <span class="fn">Chris Hyzer</span> 
+	  <span class="n hidden">
+		<span class="family-name">Hyzer</span>
+	  </span>
+	</span>
+	<span class="org vcardline">ciferproject.org</span>
+	<span class="adr">
+	  
+	  <span class="vcardline">
+		<span class="locality"></span> 
+		<span class="region"></span>
+		<span class="code"></span>
+	  </span>
+	  <span class="country-name vcardline"></span>
+	</span>
+	<span class="vcardline">EMail: <a href="mailto:mchyzer@isc.upenn.edu">mchyzer@isc.upenn.edu</a></span>
+
+  </address>
+</div><div class="avoidbreak">
+  <address class="vcard">
+	<span class="vcardline">
+	  <span class="fn">Benn Oshrin</span> 
+	  <span class="n hidden">
+		<span class="family-name">Oshrin</span>
+	  </span>
+	</span>
+	<span class="org vcardline">ciferproject.org</span>
+	<span class="adr">
+	  
+	  <span class="vcardline">
+		<span class="locality"></span> 
+		<span class="region"></span>
+		<span class="code"></span>
+	  </span>
+	  <span class="country-name vcardline"></span>
+	</span>
+	<span class="vcardline">EMail: <a href="mailto:benno@internet2.edu">benno@internet2.edu</a></span>
+
+  </address>
+</div><div class="avoidbreak">
+  <address class="vcard">
+	<span class="vcardline">
+	  <span class="fn">Bill Thompson</span> 
+	  <span class="n hidden">
+		<span class="family-name">Thompson</span>
+	  </span>
+	</span>
+	<span class="org vcardline">ciferproject.org</span>
+	<span class="adr">
+	  
+	  <span class="vcardline">
+		<span class="locality"></span> 
+		<span class="region"></span>
+		<span class="code"></span>
+	  </span>
+	  <span class="country-name vcardline"></span>
+	</span>
+	<span class="vcardline">EMail: <a href="mailto:wgthom@gmail.com">wgthom@gmail.com</a></span>
+
+  </address>
+</div><div class="avoidbreak">
+  <address class="vcard">
+	<span class="vcardline">
+	  <span class="fn">Jimmy Vuccolo</span> 
+	  <span class="n hidden">
+		<span class="family-name">Vuccolo</span>
+	  </span>
+	</span>
+	<span class="org vcardline">ciferproject.org</span>
+	<span class="adr">
+	  
+	  <span class="vcardline">
+		<span class="locality"></span> 
+		<span class="region"></span>
+		<span class="code"></span>
+	  </span>
+	  <span class="country-name vcardline"></span>
+	</span>
+	<span class="vcardline">EMail: <a href="mailto:jvuccolo@psu.edu">jvuccolo@psu.edu</a></span>
 
   </address>
 </div>

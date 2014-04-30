@@ -53,37 +53,43 @@
       </address>
     </author>
     <author fullname="Jim Fox" initials="J." surname="Fox">
-      <organization>ciferproject.org</organization>
+      <organization>University of Washington</organization>
       <address>
        <email>fox@uw.edu</email>
       </address>
     </author>
     <author fullname="Keith Hazelton" initials="K." surname="Hazelton">
-      <organization>ciferproject.org</organization>
+      <organization>University of Wisconsin</organization>
       <address>
        <email>hazelton@wisc.edu</email>
       </address>
     </author>
     <author fullname="Chris Hyzer" initials="C." surname="Hyzer">
-      <organization>ciferproject.org</organization>
+      <organization>University of Pennsylvania</organization>
       <address>
        <email>mchyzer@isc.upenn.edu</email>
       </address>
     </author>
     <author fullname="Benn Oshrin" initials="B." surname="Oshrin">
-      <organization>ciferproject.org</organization>
+      <organization>Internet2</organization>
       <address>
        <email>benno@internet2.edu</email>
       </address>
     </author>
+    <author fullname="Brian Savage" initials="B." surname="Savage">
+      <organization>Boston College</organization>
+      <address>
+       <email>brian.savage@bc.edu</email>
+      </address>
+    </author>
     <author fullname="Bill Thompson" initials="B." surname="Thompson">
-      <organization>ciferproject.org</organization>
+      <organization>Unicon</organization>
       <address>
        <email>wgthom@gmail.com</email>
       </address>
     </author>
     <author fullname="Jimmy Vuccolo" initials="J." surname="Vuccolo">
-      <organization>ciferproject.org</organization>
+      <organization>Penn State</organization>
       <address>
        <email>jvuccolo@psu.edu</email>
       </address>
@@ -293,7 +299,7 @@ One desired feature of such systems is a consistancy tructure and vocabulary of 
         <list style="symbols">
          <t>Query string may specify a list desired fields: "&amp;fields=field1,field2,...&amp;" </t>
          <t>A requests for an unknown field is not an error.</t>
-         <t>Support for this features is optional.</t> 
+         <t>Support for this feature is optional.</t> 
         </list>
        </t>
        <t>Requests for large resources, e.g. group membership,  may specify paging parameters
@@ -384,6 +390,7 @@ One desired feature of such systems is a consistancy tructure and vocabulary of 
           <t>400: the request was not valid</t>
           <t>401: the client was unauthenticated</t>
           <t>403: an authenticated client was not authorized for the request</t>
+          <t>404: a requested resource was not found</t>
           <t>409: (conflict)
            <list style="symbols">
             <t>PUT to an existing resource without an If-Match</t>

@@ -2,7 +2,7 @@
 
 For full documentation visit [mkdocs.org](http://mkdocs.org).
 
-### Why Guidelines for Shared APIs in Higher Education and Research
+### Why Guidelines for Shared APIs in Higher Education and Research?
 
 * `mkdocs new [dir-name]` - Create a new project.
 * `mkdocs serve` - Start the live-reloading docs server.

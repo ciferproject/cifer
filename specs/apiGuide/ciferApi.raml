@@ -1,0 +1,21 @@
+#%RAML 0.8
+# starter version of CIFER APIs expressed in RAML
+
+title: CIFER API
+baseUri: http://api.aktis.org/{version}
+version: v0.1.0
+
+traits:
+  - paged:
+      queryParameters:
+        startIndex:
+          description: The 1-based index of the first query result.
+          type: integer
+        count:
+          description: Specifies the desired maximum number of query results per page.
+          type: integer
+  - secured: !include http://yaml.aktis.org/secured.yml
+/people:
+  is: [ paged, secured ]
+  get:
+    description: Get a list of people.

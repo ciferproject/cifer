@@ -1,12 +1,7 @@
-site_name: My Docs
+site_name: CIFER
 
-theme: readthedocs
+theme: mkdocs
 
 pages:
 - Home: 'README.md'
-- User Guide:
-    - 'Writing your docs': 'user-guide/writing-your-docs.md'
-    - 'Styling your docs': 'user-guide/styling-your-docs.md'
-- About:
-    - 'License': 'LICENSE'
-    - 'Release Notes': 'about/release-notes.md'
+

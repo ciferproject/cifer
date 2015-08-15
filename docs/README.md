@@ -10,4 +10,4 @@ The guidelines are intended to make it easier to use the APIs as well by guarant
 
 ### Specifics
 
-The rude beginnings of this work can be seen in this [RAML](http://raml.org) (REST API Markup Language) [file](../specs/apiGuide/ciferApi.raml).
+The rude beginnings of this work can be seen in this [RAML](http://raml.org) (RESTful API Markup Language) [file](../specs/apiGuide/ciferApi.raml).

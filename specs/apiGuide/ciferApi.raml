@@ -1,10 +1,9 @@
 #%RAML 0.8
-# starter version of CIFER APIs expressed in RAML
-
+# Starter version of CIFER APIs
 title: CIFER API
-baseUri: http://api.aktis.org/{version}
 version: v0.1.0
-
+baseUri: http://api.aktis.org/{version}
+mediaType: application+json
 traits:
   - paged:
       queryParameters:
@@ -14,8 +13,7 @@ traits:
         count:
           description: Specifies the desired maximum number of query results per page.
           type: integer
-  - secured: !include http://yaml.aktis.org/secured.yml
 /people:
-  is: [ paged, secured ]
+  is: [ paged ]
   get:
     description: Get a list of people.

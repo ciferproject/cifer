@@ -407,9 +407,9 @@
   <meta name="generator" content="xml2rfc version 2.4.5 - http://tools.ietf.org/tools/xml2rfc" />
   <link rel="schema.dct" href="http://purl.org/dc/terms/" />
 
-  <meta name="dct.creator" content="Fox, J., Ed., Fox, J., Hazelton, K., Hyzer, C., Oshrin, B., Thompson, B., and J. Vuccolo" />
+  <meta name="dct.creator" content="Fox, J., Ed., Fox, J., Hazelton, K., Hyzer, C., Oshrin, B., Savage, B., Thompson, B., and J. Vuccolo" />
   <meta name="dct.identifier" content="urn:ietf:id:ciferproject-org-framework-api-v1-draft-02" />
-  <meta name="dct.issued" scheme="ISO8601" content="2014-4-28" />
+  <meta name="dct.issued" scheme="ISO8601" content="2014-4-30" />
   <meta name="dct.abstract" content="The CIFER API Framework gives a consistant look, feel, syntax and nomenclature to all of the various CIFER resource representations." />
   <meta name="description" content="The CIFER API Framework gives a consistant look, feel, syntax and nomenclature to all of the various CIFER resource representations." />
 
@@ -426,15 +426,31 @@
 </tr>
 <tr>
   <td class="left">Internet-Draft</td>
-  <td class="right">J. Fox</td>
+  <td class="right">ciferproject.org</td>
 </tr>
 <tr>
   <td class="left">Intended status: Informational</td>
+  <td class="right">J. Fox</td>
+</tr>
+<tr>
+  <td class="left">Expires: November 1, 2014</td>
+  <td class="right">University of Washington</td>
+</tr>
+<tr>
+  <td class="left"></td>
   <td class="right">K. Hazelton</td>
 </tr>
 <tr>
-  <td class="left">Expires: October 30, 2014</td>
+  <td class="left"></td>
+  <td class="right">University of Wisconsin</td>
+</tr>
+<tr>
+  <td class="left"></td>
   <td class="right">C. Hyzer</td>
+</tr>
+<tr>
+  <td class="left"></td>
+  <td class="right">University of Pennsylvania</td>
 </tr>
 <tr>
   <td class="left"></td>
@@ -442,7 +458,23 @@
 </tr>
 <tr>
   <td class="left"></td>
+  <td class="right">Internet2</td>
+</tr>
+<tr>
+  <td class="left"></td>
+  <td class="right">B. Savage</td>
+</tr>
+<tr>
+  <td class="left"></td>
+  <td class="right">Boston College</td>
+</tr>
+<tr>
+  <td class="left"></td>
   <td class="right">B. Thompson</td>
+</tr>
+<tr>
+  <td class="left"></td>
+  <td class="right">Unicon</td>
 </tr>
 <tr>
   <td class="left"></td>
@@ -450,11 +482,11 @@
 </tr>
 <tr>
   <td class="left"></td>
-  <td class="right">ciferproject.org</td>
+  <td class="right">Penn State</td>
 </tr>
 <tr>
   <td class="left"></td>
-  <td class="right">April 28, 2014</td>
+  <td class="right">April 30, 2014</td>
 </tr>
 
     	
@@ -474,7 +506,7 @@
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on October 30, 2014.</p>
+<p>This Internet-Draft will expire on November 1, 2014.</p>
 <h1 id="rfc.copyrightnotice">
   <a href="#rfc.copyrightnotice">Copyright Notice</a>
 </h1>
@@ -619,7 +651,7 @@
 <p/>
 
 <ol>
-  <li>Requests may specify field filters on returned resources.  <ul><li>Query string may specify a list desired fields: "&amp;fields=field1,field2,...&amp;" </li><li>A requests for an unknown field is not an error.</li><li>Support for this features is optional.</li></ul><p> </p></li>
+  <li>Requests may specify field filters on returned resources.  <ul><li>Query string may specify a list desired fields: "&amp;fields=field1,field2,...&amp;" </li><li>A requests for an unknown field is not an error.</li><li>Support for this feature is optional.</li></ul><p> </p></li>
   <li>Requests for large resources, e.g. group membership,  may specify paging parameters <ul><li>sortField:</li><li>sortOrder: 'a*', 'd*', case insensitive</li><li>pageLimit: number of entries per page, zero means no paging</li><li>Mutually exclusive page start: <ul><li>pageOffset: page number, starting with zero, OR</li><li>pageStartValue: first value returned will be the one AFTER this value</li></ul><p> </p></li><li>The service may provide default paging parameters, and may reduce the requested limits.</li></ul><p> </p></li>
   <li>Boolean parameters are generously interpreted: <ul><li>true|false,  or t|f or yes|no,  or y|n or 1|0, case insensitive</li></ul><p> </p></li>
   <li>A client may request a pretty-printed response with the query string, "indent=true".</li>
@@ -658,6 +690,7 @@
   <li>400: the request was not valid</li>
   <li>401: the client was unauthenticated</li>
   <li>403: an authenticated client was not authorized for the request</li>
+  <li>404: a requested resource was not found</li>
   <li>409: (conflict) <ul><li>PUT to an existing resource without an If-Match</li></ul><p> </p></li>
   <li>412: (precondition failed) <ul><li>If-Match header did not match resource's ETag, or</li><li>If-Match header supplied but resource not found (add with an if-match), or</li><li>wildcard if-match not allowed</li></ul><p> </p></li>
   <li>500: server error</li>
@@ -787,7 +820,7 @@
 		<span class="family-name">Fox</span>
 	  </span>
 	</span>
-	<span class="org vcardline">ciferproject.org</span>
+	<span class="org vcardline">University of Washington</span>
 	<span class="adr">
 	  
 	  <span class="vcardline">
@@ -808,7 +841,7 @@
 		<span class="family-name">Hazelton</span>
 	  </span>
 	</span>
-	<span class="org vcardline">ciferproject.org</span>
+	<span class="org vcardline">University of Wisconsin</span>
 	<span class="adr">
 	  
 	  <span class="vcardline">
@@ -829,7 +862,7 @@
 		<span class="family-name">Hyzer</span>
 	  </span>
 	</span>
-	<span class="org vcardline">ciferproject.org</span>
+	<span class="org vcardline">University of Pennsylvania</span>
 	<span class="adr">
 	  
 	  <span class="vcardline">
@@ -850,7 +883,7 @@
 		<span class="family-name">Oshrin</span>
 	  </span>
 	</span>
-	<span class="org vcardline">ciferproject.org</span>
+	<span class="org vcardline">Internet2</span>
 	<span class="adr">
 	  
 	  <span class="vcardline">
@@ -866,12 +899,33 @@
 </div><div class="avoidbreak">
   <address class="vcard">
 	<span class="vcardline">
+	  <span class="fn">Brian Savage</span> 
+	  <span class="n hidden">
+		<span class="family-name">Savage</span>
+	  </span>
+	</span>
+	<span class="org vcardline">Boston College</span>
+	<span class="adr">
+	  
+	  <span class="vcardline">
+		<span class="locality"></span> 
+		<span class="region"></span>
+		<span class="code"></span>
+	  </span>
+	  <span class="country-name vcardline"></span>
+	</span>
+	<span class="vcardline">EMail: <a href="mailto:brian.savage@bc.edu">brian.savage@bc.edu</a></span>
+
+  </address>
+</div><div class="avoidbreak">
+  <address class="vcard">
+	<span class="vcardline">
 	  <span class="fn">Bill Thompson</span> 
 	  <span class="n hidden">
 		<span class="family-name">Thompson</span>
 	  </span>
 	</span>
-	<span class="org vcardline">ciferproject.org</span>
+	<span class="org vcardline">Unicon</span>
 	<span class="adr">
 	  
 	  <span class="vcardline">
@@ -892,7 +946,7 @@
 		<span class="family-name">Vuccolo</span>
 	  </span>
 	</span>
-	<span class="org vcardline">ciferproject.org</span>
+	<span class="org vcardline">Penn State</span>
 	<span class="adr">
 	  
 	  <span class="vcardline">

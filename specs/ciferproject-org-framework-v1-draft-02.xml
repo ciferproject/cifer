@@ -36,7 +36,7 @@
     <!-- Another author who claims to be an editor -->
 
     <author fullname="Jim Fox" initials="J." surname="Fox" role="editor">
-      <organization>ciferproject.org</organization>
+      <organization>University of Washington</organization>
       <address>
         <postal>
           <street>4333 Brooklyn Ave NE</street>
@@ -50,12 +50,6 @@
         </postal>
         <phone>+1 206 543 4320</phone>
         <email>fox@uw.edu</email>
-      </address>
-    </author>
-    <author fullname="Jim Fox" initials="J." surname="Fox">
-      <organization>University of Washington</organization>
-      <address>
-       <email>fox@uw.edu</email>
       </address>
     </author>
     <author fullname="Keith Hazelton" initials="K." surname="Hazelton">
@@ -95,7 +89,7 @@
       </address>
     </author>
 
-    <date year="2014" />
+    <date year="2015" />
 
     <!-- If the month and year are both specified and are the current ones, xml2rfc will fill 
          in the current day for you. If only the current year is specified, xml2rfc will fill 
@@ -128,7 +122,7 @@
   <middle>
     <section title="Introduction">
       <t>The <xref target="CIFER" /> initiative includes work to define a set of shared APIs for core functions in identity and access management. 
-One desired feature of such systems is a consistancy tructure and vocabulary of API URLs and representations.
+One desired feature of such systems is a consistent structure and vocabulary of API URLs and representations.
       </t>
     </section>
    <section title="Definitions">

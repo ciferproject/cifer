@@ -30,20 +30,19 @@ resourceTypes:
         queryParameters:
         body:
           application/json:
-            schema: <<resourcePathName|!singularize>> to IAM instance
+            schema: <<resourcePathName|!singularize>>
         responses:
           200:
             body:
               application/json:
-                example: { "message": "The <<resourcePathName|!singularize>> has been added to the IAM instance"}
-          
+                example:  "message"
 /persons:
-  type: collection 
+  type: collection
   get:
-    description: Get a list of people.
+    description: "Get a list of people."
     queryParameters: 
       name:
-        description: A string that matches one of the IAM system's name part values
+        description: "A string that matches one of the IAM system's name part values"
         required: false
         minLength: 3
         type: string
@@ -63,16 +62,16 @@ resourceTypes:
                 },
                   ]
   post:
-  /{personId}
+  /{personId}:
     get:
     put:
     delete:
 /groups:
   type: collection
   get:
-    description: Get a list of groups.
+    description: "Get a list of groups."
   post:
-  /{groupId}
+  /{groupId}:
     get:
     put:
     delete:
@@ -82,10 +81,9 @@ resourceTypes:
   get:
     description: Get a list of supported schemas
   post:
-  /{schemaId}
+  /{schemaId}:
     get:
     put:
     delete:
-
 
 

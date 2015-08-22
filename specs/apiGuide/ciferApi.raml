@@ -1,9 +1,10 @@
 #%RAML 0.8
 # Starter version of CIFER APIs
-title: CIFER API
-version: v0.1.0
+title: CIFER APIs
+version: v0.1
 baseUri: http://api.aktis.org/{version}
 mediaType: application+json
+
 traits:
   - paged:
       queryParameters:
@@ -13,11 +14,78 @@ traits:
         count:
           description: Specifies the desired maximum number of query results per page.
           type: integer
-/people:
-  is: [ paged ]
+
+resourceTypes:
+  - collection:
+      description: Collection of available <<resourcePathName>> in IAM instance
+      is: [ paged ]
+      get: 
+        description: Get a list of <<resourcePathName>>
+        responses:
+          200:
+            body:
+              application/json:
+      post:
+        description: Add a new <<resourcePathName|!singularize>> to IAM instance
+        queryParameters:
+        body:
+          application/json:
+            schema: <<resourcePathName|!singularize>> to IAM instance
+        responses:
+          200:
+            body:
+              application/json:
+                example: { "message": "The <<resourcePathName|!singularize>> has been added to the IAM instance"}
+          
+/persons:
+  type: collection 
   get:
     description: Get a list of people.
+    queryParameters: 
+      name:
+        description: A string that matches one of the IAM system's name part values
+        required: false
+        minLength: 3
+        type: string
+        example: "smi"
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              "persons": [
+                {
+                  "personId": "5359aa23-ef21-de45-a002-9587780b2c",
+                  "surname": "Smidgeon"
+                },
+                  "personId": "48ae3a01-ee67-d045-3045-93acb47685",
+                  "surname": "Smith"
+                },
+                  ]
+  post:
+  /{personId}
+    get:
+    put:
+    delete:
 /groups:
-  is: [ paged ]
+  type: collection
   get:
     description: Get a list of groups.
+  post:
+  /{groupId}
+    get:
+    put:
+    delete:
+
+/schemas:
+  type: collection
+  get:
+    description: Get a list of supported schemas
+  post:
+  /{schemaId}
+    get:
+    put:
+    delete:
+
+
+

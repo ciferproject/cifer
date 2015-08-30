@@ -3,5 +3,5 @@ site_name: CIFER
 theme: mkdocs
 
 pages:
-- Home: 'README.md'
+- Home: 'index.md'
 

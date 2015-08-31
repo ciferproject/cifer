@@ -1,0 +1,96 @@
+#%RAML 0.8
+# Starter version of CIFER APIs
+title: CIFER APIs
+version: v0.1
+baseUri: http://api.aktis.org/{version}
+mediaType: application+json
+schemas:
+  - personResponse: !include schemas/personResponse-schema.json
+
+traits:
+  - paged:
+      queryParameters:
+        startIndex:
+          description: The 1-based index of the first query result.
+          type: integer
+        count:
+          description: Specifies the desired maximum number of query results per page.
+          type: integer
+
+resourceTypes:
+  - collection:
+      description: Collection of available <<resourcePathName>> in IAM instance
+      is: [ paged ]
+      get: 
+        description: Get a list of <<resourcePathName>>
+        responses:
+          200:
+            body:
+              application/json:
+      post:
+        description: Add a new <<resourcePathName|!singularize>> to IAM instance
+        body:
+          application/json:
+            schema: <<resourcePathName|!singularize>>Response
+        responses:
+          200:
+            body:
+              application/json:
+                example:  "message"
+/persons:
+  type: collection
+  get:
+    description: "Get a list of people."
+    queryParameters: 
+      name:
+        description: "A string that matches one of the IAM system's name part values"
+        required: false
+        minLength: 3
+        type: string
+        example: "smi"
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              "persons": [
+                {
+                  "personId": "5359aa23-ef21-de45-a002-9587780b2c",
+                  "surname": "Smidgeon"
+                },
+                  "personId": "48ae3a01-ee67-d045-3045-93acb47685",
+                  "surname": "Smith"
+                },
+                  ]
+  post:
+  /{personId}:
+    get:
+      description: Return the person resource pointed to by the provided {personId}
+      responses:
+        200:
+          body:
+            application/json:
+              schema: personResponse
+              example: a person response example
+    put:
+    delete:
+/groups:
+  type: collection
+  get:
+    description: "Get a list of groups."
+  post:
+  /{groupId}:
+    get:
+    put:
+    delete:
+
+/schemas:
+  type: collection
+  get:
+    description: Get a list of supported schemas
+  post:
+  /{schemaId}:
+    get:
+    put:
+    delete:
+
